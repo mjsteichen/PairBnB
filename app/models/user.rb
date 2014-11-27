@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :password_digest, length: { minimum: 8 }
 
   has_many :messages
-  has_many :shoutouts
+  has_many :shoutouts, foreign_key: "host_id"
   has_many :pairings
   has_many :residences
   has_many :availabilities, through: :residences
