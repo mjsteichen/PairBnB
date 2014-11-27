@@ -1,0 +1,10 @@
+<%= link_to 'Login' %>
+    <%= form_for :session, url: sessions_path do |f| %>
+      <% if @error_message %>
+        <p><%= @error_message %></p>
+      <% end %>
+      <%= f.text_field :email, placeholder: "email" %><br>
+      <%= f.password_field :password, placeholder: "password" %><br>
+      <%= f.submit 'Login' %>
+    <% end %>
+<%= link_to 'Sign Up', new_user_path %>
