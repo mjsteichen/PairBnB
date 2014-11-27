@@ -32,7 +32,7 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="383" y="237" name="users">
+</datatypes><table x="399" y="237" name="users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -85,7 +85,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="116" y="53" name="messages">
+<table x="164" y="64" name="messages">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -104,15 +104,15 @@
 <part>id</part>
 </key>
 </table>
-<table x="602" y="330" name="pairings">
+<table x="622" y="330" name="pairings">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="host" null="1" autoincrement="0">
+<row name="host_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
-<row name="visitor" null="1" autoincrement="0">
+<row name="visitor_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
@@ -120,7 +120,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="131" y="291" name="shoutouts">
+<table x="167" y="284" name="shoutouts">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -161,7 +161,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="391" y="17" name="images">
+<table x="385" y="62" name="images">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
