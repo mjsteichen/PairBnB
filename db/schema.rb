@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20141127012509) do
 
   create_table "images", force: true do |t|
     t.integer  "residence_id"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,8 +58,8 @@ ActiveRecord::Schema.define(version: 20141127012509) do
   end
 
   create_table "shoutouts", force: true do |t|
-    t.integer  "host_id"
-    t.integer  "visitor_id"
+    t.integer  "recipient_id"
+    t.integer  "sender_id"
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
