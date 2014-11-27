@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email, format: /.+@.+\..+/
   validates :password_digest, length: { minimum: 8 }
 
+
   has_many :sent_messages, class_name: "Message", foreign_key: :sender_id
   has_many :received_messages, class_name: "Message", foreign_key: :recipient_id
   has_many :sent_shoutouts, class_name: "Shoutout", foreign_key: :sender_id
