@@ -1,0 +1,2 @@
+class ShoutoutsController < ApplicationController
+end

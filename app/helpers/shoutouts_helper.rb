@@ -1,0 +1,2 @@
+module ShoutoutsHelper
+end
