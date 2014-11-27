@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 # On dat faker life yo
 gem 'faker'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'
