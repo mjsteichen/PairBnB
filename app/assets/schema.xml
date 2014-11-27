@@ -124,11 +124,11 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="host_id" null="1" autoincrement="0">
+<row name="sender_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
-<row name="visitor_id" null="1" autoincrement="0">
+<row name="recipient_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
@@ -169,6 +169,9 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="residences" row="id" />
 </row>
+<row name="image_url" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>

@@ -1,6 +1,6 @@
 class Shoutout < ActiveRecord::Base
-  validates :host_id, :visitor_id, :text, presence: true
+  validates :recipient_id, :sender_id, :text, presence: true
 
-  belongs_to :host, class_name: "User", foreign_key: "user_id"
-  belongs_to :visitor, class_name: "User", foreign_key: "user_id"
+  belongs_to :recipient, class_name: "User"
+  belongs_to :sender, class_name: "User"
 end
