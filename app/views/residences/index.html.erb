@@ -1,1 +1,6 @@
-Residences Index
+<ul>
+<% @residences.each do |residence| %>
+  <li><%= residence.user.name %> - <%= residence.neighborhood%> - <%= residence.user.specialities %></li>
+  <% end %>
+</ul>
+
