@@ -1,0 +1,11 @@
+<h2>Results for <%= params[:search] %></h2>
+
+<ul>
+<% @residences.each do |residence| %>
+  <li><img src=<%= residence.user.picture_url %>>
+    <%=link_to residence.user.name, residence_path(residence) %>
+    <%= residence.neighborhood%> - <%= residence.user.specialties %><br>
+    <%= residence.user.bio[0,40] + "..." %>
+    </li>
+<% end %>
+</ul>

@@ -36,6 +36,9 @@ gem 'pry'
 
 # On dat faker life yo
 gem 'faker'
+gem 'pry'
+
+
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0'

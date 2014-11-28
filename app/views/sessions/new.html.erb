@@ -1,3 +1,10 @@
+<%= form_tag residences_search_path, :method => 'get' do %>
+
+    <%= text_field_tag :search, params[:search], placeholder: "I'm going to..." %>
+    <%= submit_tag "Search", :city => nil %>
+
+  <% end %>
+
 <div class="row">
   <div class="col-xs-2 col-md-4"></div>
   <div class="col-xs-8 col-md-4">
