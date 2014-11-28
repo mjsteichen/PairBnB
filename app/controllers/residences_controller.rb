@@ -4,6 +4,8 @@ class ResidencesController < ApplicationController
   end
 
   def show
+    @residence = Residence.find(params[:id])
+    @user = User.find(@residence.user.id)
   end
 
   def new

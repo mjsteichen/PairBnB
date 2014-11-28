@@ -1,1 +1,20 @@
-residence show
+<%= link_to 'Back', residences_path %>
+<h1><%= @user.name %></h1>
+  <img src=<%= @user.picture_url %>>
+  <h3>Specialties</h3>
+    <p><%= @user.specialties %>
+  <h3>Shoutouts</h3>
+    <% @user.received_shoutouts.each do |shoutout| %>
+      <p><%= shoutout.text %></p>
+    <% end %>
+  <h3>Bio</h3>
+    <p><%= @user.bio %></p>
+  <h3>House Description & Rules</h3>
+    <p><%= @residence.description %></p>
+    <% @residence.images.each do |image| %>
+    <img src=<%= image.url %>>
+  <% end %>
+  <h3>Upcoming Availability</h3>
+    <% @residence.availabilities.each do |residence| %>
+      <p><%= residence.date %></p>
+    <% end %>
