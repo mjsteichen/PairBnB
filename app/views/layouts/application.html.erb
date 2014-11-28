@@ -7,9 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render partial: 'shared/navigation' %>
   <% if session[:user_id] %>
     <%= link_to 'Logout', session_path(current_user), method: :delete %>
   <% end %>
+  <br>
 
 <%= yield %>
 

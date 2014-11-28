@@ -1,10 +1,22 @@
+<div class="row">
+  <div class="col-xs-2 col-md-4"></div>
+  <div class="col-xs-8 col-md-4">
 <%= link_to 'Login', :id => 'loginbar' %>
-    <%= form_for :session, url: sessions_path do |f| %>
-      <% if @error_message %>
-        <p><%= @error_message %></p>
-      <% end %>
-      <%= f.text_field :email, placeholder: "email" %><br>
-      <%= f.password_field :password, placeholder: "password" %><br>
-      <%= f.submit 'Login' %>
+  <%= form_for :session, url: sessions_path do |f| %>
+    <% if @error_message %>
+      <p><%= @error_message %></p>
     <% end %>
-<%= link_to 'Sign Up', new_user_path %>
+    <div class="form-group">
+        <div class="field form-group">
+          <%= f.text_field :email, placeholder: "email", class: 'form-control' %>
+        </div>
+      </div>
+          <div class="form-group">
+          <%= f.password_field :password, placeholder: "password", class: "form-control" %><br>
+        </div>
+
+        <%= f.submit 'Login', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+      <%= link_to 'Sign Up', new_user_path %>
+</div>
