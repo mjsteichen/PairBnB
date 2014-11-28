@@ -10,6 +10,7 @@ feature "user sessions" do
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => "testing123"
     click_button 'Login'
+    expect(page).to have_text('Logout')
   end
 
   scenario "when user clicks sign up" do
