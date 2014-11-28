@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :residences
   resources :pairings
+  resources :messages
 
   # You can have the root of your site routed with "root"
   root 'sessions#new'

@@ -23,6 +23,14 @@ class ResidencesController < ApplicationController
   end
 
   def update
+    @residence = Residence.find(params[:id])
+    @user = @residence.user
+    @residence.update(city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], description: params[:residence][:description])
+    redirect_to user_path(@user)
+  end
+
+  def edit
+    @residence = Residence.find(params[:residence].to_i)
   end
 
   def destroy

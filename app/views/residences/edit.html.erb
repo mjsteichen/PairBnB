@@ -1,0 +1,7 @@
+<%= form_for @residence, method: :put do |f| %>
+  <%= f.text_field :city, placeholder: @residence.city %><br>
+  <%= f.text_field :state, placeholder: @residence.state %><br>
+  <%= f.text_field :zip_code, placeholder: @residence.zip_code %><br>
+  <%= f.text_field :description, placeholder: @residence.description %><br>
+  <%= f.submit "Update your place" %>
+<% end %>
