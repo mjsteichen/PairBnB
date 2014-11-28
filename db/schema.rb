@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20141127012509) do
     t.string   "password_digest"
     t.string   "picture_url"
     t.string   "bio"
-    t.string   "specialities"
+    t.string   "specialties"
     t.string   "github_url"
     t.string   "twitter_url"
     t.datetime "created_at"
