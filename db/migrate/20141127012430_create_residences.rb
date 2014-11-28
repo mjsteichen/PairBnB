@@ -5,6 +5,7 @@ class CreateResidences < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :zip_code
+      t.string :neighborhood
       t.string :description
 
       t.timestamps
