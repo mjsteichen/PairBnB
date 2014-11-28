@@ -1,6 +1,9 @@
 <ul>
 <% @residences.each do |residence| %>
-  <li><%= residence.user.name %> - <%= residence.neighborhood%> - <%= residence.user.specialties %></li>
+  <li><img src=<%= residence.user.picture_url %>>
+    <%=link_to residence.user.name, residence_path(residence) %>
+    <%= residence.neighborhood%> - <%= residence.user.specialties %>
+  </li>
   <% end %>
 </ul>
 
