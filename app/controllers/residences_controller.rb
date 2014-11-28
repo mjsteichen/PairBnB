@@ -3,6 +3,10 @@ class ResidencesController < ApplicationController
     @residences = Residence.all
   end
 
+  def search
+    @residences = Residence.where(city: params[:search])
+  end
+
   def show
     @residence = Residence.find(params[:id])
     @user = User.find(@residence.user.id)
