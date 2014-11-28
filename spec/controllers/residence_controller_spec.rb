@@ -22,7 +22,10 @@ describe ResidencesController do
     context "when valid params are passed" do
       it 'assigns a new residence as @residence' do
         residence_params = {residence: {city: "Chicago", state: "IL", zip_code: "12345", description: "It's hella decent"} }
-        # current_user.id = 4
+
+        user = User.create(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")
+        allow(controller).to receive(:current_user) {user}
+
         post :create, residence_params
         expect(assigns(:residence)).to eq(Residence.last)
       end
@@ -30,12 +33,16 @@ describe ResidencesController do
     context "when invalid params are passed" do
       it "assigns a newly created but unsaved residence as @residence" do
         residence_params = {residence: {state: "IL", zip_code: "12345", description: "It's hella decent"} }
+        user = User.create(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")
+        allow(controller).to receive(:current_user) {user}
         post :create, residence_params
         expect(assigns(:residence)).to be_a_new(Residence)
       end
 
       it 'renders the new template after attempt' do
         residence_params = {residence: {state: "IL", zip_code: "12345", description: "It's hella decent"} }
+        user = User.create(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")
+        allow(controller).to receive(:current_user) {user}
         post :create, residence_params
         expect(response).to render_template("new")
       end
