@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :picture_url
       t.string :bio
-      t.string :specialities
+      t.string :specialties
       t.string :github_url
       t.string :twitter_url
 
