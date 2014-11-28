@@ -12,7 +12,30 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
+$(document).ready(function() {
+  $(".displays").hide();
+  $("#user_availabilities").show();
+  $("#mess").click(function(event) {
+    event.preventDefault();
+    $(".displays").hide();
+    $("#user_messages").show();
+  });
+  $("#res").click(function(event) {
+    event.preventDefault();
+    $(".displays").hide();
+    $("#user_residences").show();
+  });
+  $("#avail").click(function(event) {
+    event.preventDefault();
+    $(".displays").hide();
+    $("#user_availabilities").show();
+  });
+  $("#info").click(function(event) {
+    event.preventDefault();
+    $(".displays").hide();
+    $("#user_information").show();
+  });
+});

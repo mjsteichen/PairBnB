@@ -1,1 +1,51 @@
-hello world
+<nav>
+  <a id="mess" href="/">Messages</a>
+  <a id="res" href="/">Residences</a>
+  <a id="avail" href="/">Availabilities</a>
+  <a id="info" href="/">User Info</a>
+</nav>
+
+<div id="user_messages" class="displays">
+  <h1>Messages</h1>
+  <% @messages.each do |message| %>
+    <%= message.sender.name %>
+    <%= message.text %>
+  <% end %>
+</div>
+
+<div id="user_residences" class="displays">
+  <h1>Residences</h1>
+  <% @residences.each do |residence| %>
+    <% residence.images.each do |image| %>
+      <img src=<%= image.url %>>
+    <% end %>
+    <%= residence.city %>
+    <%= residence.state %>
+    <%= residence.zip_code %>
+    <%= residence.description %>
+    <%= form_for residence, url: edit_residence_path, method: :get do |f| %>
+      <%=hidden_field_tag 'residence', "#{residence.id}" %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="user_availabilities" class="displays">
+  <h1>Availabilities</h1>
+  <% @user.availabilities.each do |availability| %>
+    <%= availability.date %>
+  <% end %>
+</div>
+
+<div id="user_information" class="displays">
+  <h1>Profile</h1>
+  <img src=<%= @user.picture_url %>>
+  <%= @user.name %>
+  <%= @user.email %>
+  <%= @user.bio %>
+  <%= @user.github_url %>
+  <%= @user.twitter_url %>
+  <%= form_for @user, url: edit_user_path, method: :get do |f| %>
+      <%= f.submit %>
+  <% end %>
+</div>

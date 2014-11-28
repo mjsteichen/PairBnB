@@ -31,6 +31,9 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# I love pry, pry pry pry, down to my belly
+gem 'pry'
+
 # On dat faker life yo
 gem 'faker'
 group :development, :test do
