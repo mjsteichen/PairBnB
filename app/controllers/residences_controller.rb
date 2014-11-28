@@ -8,6 +8,7 @@ class ResidencesController < ApplicationController
   end
 
   def show
+    @message = Message.new
     @residence = Residence.find(params[:id])
     @user = User.find(@residence.user.id)
   end

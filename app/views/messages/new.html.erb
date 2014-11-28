@@ -1,0 +1,7 @@
+New Message
+<%= form_for @message, url: user_messages_path do |f| %>
+<%= f.text_field :text, placeholder: "Hey bro!" %><br>
+<%= hidden_field_tag 'residence', "#{params[:residence]}" %>
+<%= f.submit 'Send message' %>
+<% end %>
+

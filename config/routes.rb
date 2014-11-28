@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   get 'residences/search' => 'residences#search'
 
   resources :sessions, only:[:new, :create, :destroy]
-  resources :users
+  resources :users do
+    resources :messages
+  end
   resources :residences
   resources :pairings
-  resources :messages
+
 
   # You can have the root of your site routed with "root"
   root 'sessions#new'
