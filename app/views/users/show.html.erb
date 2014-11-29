@@ -1,3 +1,5 @@
+<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+
 <nav>
   <a id="mess" href="/">Messages</a>
   <a id="res" href="/">Residences</a>
@@ -50,13 +52,6 @@
   <% end %>
 </div>
 
-<div id="user_availabilities" class="displays">
-  <h1>Availabilities</h1>
-  <% @user.availabilities.each do |availability| %>
-    <%= availability.date %>
-  <% end %>
-</div>
-
 <div id="user_information" class="displays">
   <h1>Profile</h1>
   <img src=<%= @user.picture_url %>>
@@ -68,4 +63,23 @@
   <%= form_for @user, url: edit_user_path, method: :get do |f| %>
       <%= f.submit %>
   <% end %>
+</div>
+
+<div id="user_availabilities" class="displays">
+  <h1>Availabilities</h1>
+  <% @user.availabilities.each do |availability| %>
+    <%= availability.date %>
+  <% end %>
+
+  <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+
+    <div id="leftcolumn" class="yui3-u">
+       <div id="mycalendar"></div>
+    </div>
+    <div id="rightcolumn" class="yui3-u">
+     <div id="links" style="padding-left:20px;">
+        Selected date: <span id="selecteddate"></span>
+     </div>
+    </div>
+  </div>
 </div>
