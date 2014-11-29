@@ -10,10 +10,12 @@
 
 <div id="user_messages" class="displays">
   <h1>Messages</h1>
+  <ul>
   <% @messages.each do |message| %>
-    <%= message.sender.name %>
-    <%= message.text %>
+    <li>From: <%= message.sender.name %><br>
+    <%= message.text %><br></li>
   <% end %>
+</ul>
 </div>
 
 <div id="user_residences" class="displays">

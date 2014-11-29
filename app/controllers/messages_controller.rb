@@ -9,8 +9,9 @@ class MessagesController < ApplicationController
   def create
     @residence = params[:residence]
     @user = User.find(params[:user_id])
-    @message = Message.new(recipient_id: params[:user_id], text:params[:message][:text], sender_id: current_user.id )
+    @message = Message.new(recipient_id: params[:user_id], text:params[:message][:text], sender_id: session[:user_id] )
     if @message.save
+
       redirect_to residence_path(@residence)
     else
       render 'new'
