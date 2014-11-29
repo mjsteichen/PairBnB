@@ -18,6 +18,10 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+# Use Jacascript Moment
+gem 'momentjs-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -33,6 +37,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 # I love pry, pry pry pry, down to my belly
 gem 'pry'
+
+# All about that calendar, bout that calendar, no treble
+gem 'fullcalendar-rails'
 
 # On dat faker life yo
 gem 'faker'
