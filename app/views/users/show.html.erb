@@ -50,8 +50,14 @@
   <% @user.availabilities.each do |availability| %>
     <%= availability.date %>
   <% end %>
+  <br>
   <button id="add" type="button">Add Availabilities</button>
   <button id="remove" type="button">Remove Availabilities</button>
+  <% i = 0 %>
+  <% @residences.each do |residence| %>
+    <% i += 1 %>
+    <button class="residence" id="<%= i %>" type="button">Manage Residence <%= i %></button>
+  <% end %>
   <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
 
     <div id="leftcolumn" class="yui3-u">

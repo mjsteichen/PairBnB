@@ -16,29 +16,30 @@
 //= require_tree .
 
 $(document).ready(function() {
-  var available = "add"
+  var available = "add";
+  var residence = 0;
 
   $(".displays").hide();
   $("#user_availabilities").show();
   $("#mess").click(function(event) {
     event.preventDefault();
     $(".displays").hide();
-    $("#user_messages").show();
+    $("#user_messages").show()
   });
   $("#res").click(function(event) {
     event.preventDefault();
     $(".displays").hide();
-    $("#user_residences").show();
+    $("#user_residences").show()
   });
   $("#avail").click(function(event) {
     event.preventDefault();
     $(".displays").hide();
-    $("#user_availabilities").show();
+    $("#user_availabilities").show()
   });
   $("#info").click(function(event) {
     event.preventDefault();
     $(".displays").hide();
-    $("#user_information").show();
+    $("#user_information").show()
   });
 
   $("#add").click(function(event) {
@@ -49,6 +50,11 @@ $(document).ready(function() {
   $("#remove").click(function(event) {
     event.preventDefault();
     available = "remove"
+  });
+
+  $(".residence").click(function(event) {
+    event.preventDefault();
+    residence = $(this).attr("id") - 1
   })
 
   YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
@@ -70,18 +76,29 @@ $(document).ready(function() {
 
     // Listen to calendar's selectionChange event.
     calendar.on("selectionChange", function (ev) {
+      ev.preventDefault();
 
       var newDate = ev.newSelection[0];
-      var word = dtdate.format(newDate);
-      if (word.slice(8, 9) === '0') {
-        var day = word.slice(9, 10);
+      var date = dtdate.format(newDate);
+      if (date.slice(8, 9) === '0') {
+        var day = date.slice(9, 10);
       } else {
-        var day = word.slice(8, 10);
+        var day = date.slice(8, 10);
       };
       if (available == "add") {
         $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "#14A714");
+        $.ajax({
+          url: "/users/" + $("a:contains('Logout')").attr("href").slice(-1) + "/availabilities",
+          type: "POST",
+          data: { date: date, residence: residence}
+        });
       } else {
         $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "white");
+        $.ajax({
+          url: "/users/" + $("a:contains('Logout')").attr("href").slice(-1) + "/availabilities/",
+          type: "POST",
+          data: { date: date, residence: residence}
+        });
       }
       Y.one("#selecteddate").setHTML(dtdate.format(newDate));
     });

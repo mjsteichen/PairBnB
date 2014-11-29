@@ -4,7 +4,7 @@ class CreateAvailabilities < ActiveRecord::Migration
       t.belongs_to :residence
       t.belongs_to :pairing
       t.boolean :booked, default: false
-      t.date :date
+      t.string :date
 
       t.timestamps
     end
