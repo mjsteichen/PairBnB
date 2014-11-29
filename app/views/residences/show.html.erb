@@ -2,7 +2,11 @@
 <h1><%= @user.name %></h1>
   <img src=<%= @user.picture_url %>>
   <h3>Specialties</h3>
-    <p><%= @user.specialties %>
+    <p><%= @user.specialties %><br>
+      <%= form_for @message, url: new_user_message_path(@user), method: :get do |f| %>
+      <%= f.submit 'Send them a message' %>
+      <%= hidden_field_tag 'residence', "#{params[:id]}" %>
+      <% end %>
   <h3>Shoutouts</h3>
     <% @user.received_shoutouts.each do |shoutout| %>
       <p><%= shoutout.text %></p>
