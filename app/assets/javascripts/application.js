@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require moment
 //= require bootstrap-sprockets
+//= require fullcalendar
 //= require_tree .
 
 $(document).ready(function() {
