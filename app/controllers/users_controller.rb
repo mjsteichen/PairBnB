@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # if the params id is not equal to session id, then redirect back
     @user = User.find(params[:id])
     if @user.id != session[:user_id]
       session.clear
