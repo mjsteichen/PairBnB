@@ -11,6 +11,18 @@ describe ResidencesController do
     end
   end
 
+  describe 'GET #show' do
+    it 'assigns a message to be @message' do
+      get :show, { id: residence.to_param}
+      expect(assigns(:message)).to be
+    end
+
+    it 'assigns a particular residence to @residence by id' do
+      get :show, {id: residence.to_param}
+      expect(assigns(:residence)).to eq(residence)
+    end
+  end
+
   describe 'GET #new' do
     it 'assigns a new residence as @residence' do
       get :new
