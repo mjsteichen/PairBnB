@@ -15,6 +15,25 @@
 
 <div id="user_residences" class="displays">
   <h1>Residences</h1>
+      <%= link_to 'Add your place' %>
+      <div id = "add_place" >
+        <%= form_for @residence, url: residences_path, method: :post do |f| %>
+        <% if @residence.errors %>
+          <ul>
+            <% @residence.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <%= f.text_field :city, placeholder: "City" %><br>
+      <%= f.text_field :state, placeholder: "State" %><br>
+      <%= f.text_field :zip_code, placeholder: "Zipcode" %><br>
+      <%= f.text_field :description, placeholder: "House Description & Rules" %><br>
+      <%= f.submit 'List your place' %>
+    <% end %>
+  </div>
+
+
   <% @residences.each do |residence| %>
     <% residence.images.each do |image| %>
       <img src=<%= image.url %>>

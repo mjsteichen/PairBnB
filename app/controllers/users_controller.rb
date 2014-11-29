@@ -22,6 +22,7 @@ class UsersController < ApplicationController
       @availabilities = @user.availabilities
       @messages = @user.received_messages
       @residences = @user.residences
+      @residence = Residence.new
     end
   end
 
