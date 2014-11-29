@@ -5,6 +5,9 @@ class ResidencesController < ApplicationController
 
   def search
     @residences = Residence.where(city: params[:search])
+    if @residences.length == 0
+      flash[:notice] = "Sorry! No pairs in that neck of the woods."
+    end
   end
 
   def show

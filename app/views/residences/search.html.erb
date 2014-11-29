@@ -1,5 +1,16 @@
 <h2>Results for <%= params[:search] %></h2>
 
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<%= form_tag residences_search_path, :method => 'get' do %>
+
+    <%= text_field_tag :search, params[:search], value: nil, placeholder: "I'm going to..." %>
+    <%= submit_tag "Search", :city => nil %>
+
+  <% end %>
+
 <ul>
 <% @residences.each do |residence| %>
   <li><img src=<%= residence.user.picture_url %>>
