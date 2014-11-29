@@ -15,9 +15,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @availabilities = @user.availabilities
-    @messages = @user.received_messages
-    @residences = @user.residences
+    if @user.id != session[:user_id]
+      session.clear
+      redirect_to root_path
+    else
+      @availabilities = @user.availabilities
+      @messages = @user.received_messages
+      @residences = @user.residences
+    end
   end
 
   def edit
