@@ -7,6 +7,7 @@ class Residence < ActiveRecord::Base
 end
 
 def self.search(search)
+  search.capitalize!
   if search.present?
     where('city LIKE ?', "%#{search}%")
   else

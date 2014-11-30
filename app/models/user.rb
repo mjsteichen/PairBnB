@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   validates :email, :password_digest, :name, presence: true
   validates :email, uniqueness: true
-  validates :email, format: /.+@.+\..+/
-  validates :password_digest, length: { minimum: 8 }
+  validates :email, format: { with: /.+@.+\.{1}.+/ }
+  validates :password, length: { minimum: 8 }
 
 
   has_many :sent_messages, class_name: "Message", foreign_key: :sender_id
