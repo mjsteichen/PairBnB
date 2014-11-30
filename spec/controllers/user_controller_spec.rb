@@ -44,4 +44,31 @@ describe UsersController do
       end
     end
   end
+
+  describe "GET #show" do
+    it 'finds a user and assigns them to @user' do
+      get :show, { id: user.to_param }
+      expect(assigns(:user)).to eq(user)
+    end
+  end
+
+  describe "GET #edit" do
+    it 'assigns @user to a user with a particular id' do
+      get :edit, { id: user.to_param }
+      expect(assigns(:user)).to eq(user)
+    end
+  end
+
+  describe "PUT #update" do
+      pending
+    it 'assigns @user to a user with a particular id' do
+      # post :update, { id: user.to_param, name: "Test", email: "test@gmail.com", github_url: "github.com/test", twitter_url: "@test", bio: "I was born once" }
+      # expect(assigns(:user)).to eq(user)
+    end
+
+      pending
+    it 'updates @users info with the new params' do
+    end
+  end
+
 end
