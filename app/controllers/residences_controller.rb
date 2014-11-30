@@ -42,6 +42,9 @@ class ResidencesController < ApplicationController
   end
 
   def destroy
+    @residence = Residence.find(params[:id].to_i)
+    @residence.destroy!
+    redirect_to user_path(current_user)
   end
 
   private
