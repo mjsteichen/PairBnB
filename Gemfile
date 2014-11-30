@@ -42,6 +42,7 @@ gem 'rails_12factor', group: :production
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers', require: false
 end
 
 # Use unicorn as the app server
