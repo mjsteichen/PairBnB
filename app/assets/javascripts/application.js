@@ -55,7 +55,8 @@ $(document).ready(function() {
   $(".residence").click(function(event) {
     event.preventDefault();
     residence = $(this).attr("id") - 1
-  })
+  });
+
 
   YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
@@ -77,6 +78,14 @@ $(document).ready(function() {
     // Listen to calendar's selectionChange event.
     calendar.on("selectionChange", function (ev) {
       ev.preventDefault();
+
+      $(".yui3-calendarnav-nextmonth").click(function(event) {
+        $("td").css("background-color", "white")
+      });
+
+      $(".yui3-calendarnav-prevmonth").click(function(event) {
+        $("td").css("background-color", "white")
+      });
 
       var newDate = ev.newSelection[0];
       var date = dtdate.format(newDate);
