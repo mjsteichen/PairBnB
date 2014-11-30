@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       @availabilities = @user.availabilities
-      @messages = @user.received_messages
+      @messages = @user.received_messages.order(:id).reverse_order
       @residences = @user.residences
       @residence = Residence.new
     end
