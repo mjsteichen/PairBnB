@@ -36,6 +36,7 @@ gem 'pry'
 
 # On dat faker life yo
 gem 'faker'
+gem 'rails_12factor', group: :production
 
 
 group :development, :test do
