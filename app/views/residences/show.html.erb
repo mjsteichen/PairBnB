@@ -3,7 +3,7 @@
   <img src=<%= @user.picture_url %>>
   <h3>Specialties</h3>
     <p><%= @user.specialties %></p><br>
-      <% if session[:user_id] != nil %>
+      <% if session[:user_id] != nil && session[:user_id] != @user.id %>
         <%= form_for @message, url: new_user_message_path(@user), method: :get do |f| %>
         <%= f.submit 'Send them a message' %>
         <%= hidden_field_tag 'residence', "#{params[:id]}" %>
