@@ -1,7 +1,7 @@
 PairBnB
 =======
 
-AirBnB but for Programmers in #realtime #agile #dynamicevironments
+AirBnB but for Programmers in #realtime #agile #dynamicenvironments
 
 Project Description
 =======
@@ -16,5 +16,7 @@ Schema
 Team
 =======
 Nick Brown - @nick-brown2014
+
 Emily Owaki - @jabbowaki
+
 Michael Steichen - @mjsteichen

@@ -31,7 +31,7 @@
 
 <div id="user_residences" class="displays">
   <h1>Residences</h1>
-      <%= link_to 'Add your place' %>
+      <%= link_to 'Add your place' %><br>
       <div id = "add_place" >
         <%= form_for @residence, url: residences_path, method: :post do |f| %>
         <% if @residence.errors %>
@@ -67,15 +67,23 @@
 
 <div id="user_information" class="displays">
   <h1>Profile</h1>
-  <img src=<%= @user.picture_url %>>
-  <%= @user.name %>
-  <%= @user.email %>
-  <%= @user.bio %>
-  <%= @user.github_url %>
-  <%= @user.twitter_url %>
-  <%= form_for @user, url: edit_user_path, method: :get do |f| %>
-      <%= f.submit %>
-  <% end %>
+    <img src=<%= @user.picture_url %>>
+    <%= @user.name %>
+    <%= @user.email %>
+    <%= @user.bio %>
+    <%= @user.github_url %>
+    <%= @user.twitter_url %>
+    <%= form_for @user, url: edit_user_path, method: :get do |f| %>
+        <%= f.submit %>
+    <% end %>
+  <h1>Past Pairings</h1>
+    <ul>
+      <% @user.visited_pairings.each do |pair| %>
+      <li><%= link_to pair.host.name, new_pairing_shoutout_path(pair.host_id) %></li>
+      <!-- this passes the host_id aka user_id as a pairing_id, please do not panic it's ok. -->
+    <% end %>
+  </ul>
+
 </div>
 
 <div id="user_availabilities" class="displays">
