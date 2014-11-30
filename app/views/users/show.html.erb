@@ -47,8 +47,10 @@
 
 <div id="user_availabilities" class="displays">
   <h1>Availabilities</h1>
+  <% i = 0 %>
   <% @user.availabilities.each do |availability| %>
-    <%= availability.date %>
+    <p id="<%= availability.date[8, 2] %>" class="id_for_me"><%= availability.id %><p>
+    <% i += 1 %>
   <% end %>
   <br>
   <button id="add" type="button">Add Availabilities</button>

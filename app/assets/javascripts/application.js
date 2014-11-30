@@ -95,9 +95,8 @@ $(document).ready(function() {
       } else {
         $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "white");
         $.ajax({
-          url: "/users/" + $("a:contains('Logout')").attr("href").slice(-1) + "/availabilities/",
-          type: "POST",
-          data: { date: date, residence: residence}
+          url: "/users/" + $("a:contains('Logout')").attr("href").slice(-1) + "/availabilities/" + $("#" + day).text(),
+          type: "DELETE"
         });
       }
       Y.one("#selecteddate").setHTML(dtdate.format(newDate));
