@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     resources :availabilities
   end
   resources :residences
-  resources :pairings
-
+  resources :pairings do
+    resources :shoutouts
+  end
 
   # You can have the root of your site routed with "root"
   root 'sessions#new'

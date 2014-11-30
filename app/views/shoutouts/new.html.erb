@@ -1,0 +1,4 @@
+<%= form_for :shoutout, url: pairing_shoutouts_path, method: :post do |f| %>
+  <%= f.text_field :text, placeholder: "Leave a shoutout" %><br>
+  <%= f.submit "Send 'em a shoutout" %>
+<% end %>
