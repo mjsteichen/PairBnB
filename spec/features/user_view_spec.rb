@@ -28,4 +28,26 @@ feature "user sessions" do
     click_on 'Sign Up'
     expect(page).to have_text('Logout')
   end
+
+  scenario "user can't see dashboard button without being signed in" do
+    visit '/'
+    expect(page).not_to have_text('Dashboard')
+  end
+
+  scenario "user should see dashboard button when signed in" do
+    visit '/'
+    fill_in 'email', :with => "test@gmail.com"
+    fill_in 'password', :with => 'testing123'
+    click_button 'Login'
+    expect(page).to have_text('Dashboard')
+  end
+
+  scenario "user isn't prompted to sign in when already logged in" do
+    visit '/'
+    fill_in 'email', :with => "test@gmail.com"
+    fill_in 'password', :with => 'testing123'
+    click_button 'Login'
+    click_on 'Pair BnB'
+    expect(page).not_to have_text('Login')
+  end
 end
