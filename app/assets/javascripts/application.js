@@ -94,17 +94,22 @@ $(document).ready(function() {
       } else {
         var day = date.slice(8, 10);
       };
+      if ($("a:contains('Logout')").attr("href").length === 11) {
+        var user_id = $("a:contains('Logout')").attr("href").slice(-1)
+    } else {
+        var user_id = $("a:contains('Logout')").attr("href").slice(-2)
+    }
       if (available == "add") {
         $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "#14A714");
         $.ajax({
-          url: "/users/" + $("a:contains('Logout')").attr("href").slice(-1) + "/availabilities",
+          url: "/users/" + user_id + "/availabilities",
           type: "POST",
           data: { date: date, residence: residence}
         });
       } else {
         $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "white");
         $.ajax({
-          url: "/users/" + $("a:contains('Logout')").attr("href").slice(-1) + "/availabilities/" + $("#" + day).text(),
+          url: "/users/" + user_id + "/availabilities/" + $("#" + day).text(),
           type: "DELETE"
         });
       }
