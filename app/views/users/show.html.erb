@@ -31,7 +31,7 @@
 
 <div id="user_residences" class="displays">
   <h1>Residences</h1>
-      <%= link_to 'Add your place' %>
+      <%= link_to 'Add your place' %><br>
       <div id = "add_place" >
         <%= form_for @residence, url: residences_path, method: :post do |f| %>
         <% if @residence.errors %>
