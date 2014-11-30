@@ -79,7 +79,7 @@
   <h1>Past Pairings</h1>
     <ul>
       <% @user.visited_pairings.each do |pair| %>
-      <li><%= link_to User.find(pair.host_id).name, new_pairing_shoutout_path(pair.host_id) %></li>
+      <li><%= link_to pair.host.name, new_pairing_shoutout_path(pair.host_id) %></li>
       <!-- this passes the host_id aka user_id as a pairing_id, please do not panic it's ok. -->
     <% end %>
   </ul>
