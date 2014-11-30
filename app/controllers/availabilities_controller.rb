@@ -9,6 +9,7 @@ class AvailabilitiesController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:user_id])
     availability = Availability.find(params[:id])
     if availability
       availability.destroy
