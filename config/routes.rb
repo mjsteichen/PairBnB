@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :messages
     resources :availabilities
+    resources :requests
   end
 
   resources :residences do

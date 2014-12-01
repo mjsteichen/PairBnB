@@ -21,6 +21,11 @@
 
     $(".displays").hide();
     $("#user_availabilities").show();
+    $("#req").click(function(event) {
+      event.preventDefault();
+      $(".displays").hide();
+      $("#user_requests").show()
+    });
     $("#mess").click(function(event) {
       event.preventDefault();
       $(".displays").hide();
@@ -56,6 +61,10 @@
       event.preventDefault();
       residence = $(this).attr("id") - 1
     });
+
+    $("#reject").click(function(event) {
+
+    })
 
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
@@ -130,12 +139,38 @@
   <a id="res" href="/">Residences</a>
   <a id="avail" href="/">Availabilities</a>
   <a id="info" href="/">User Info</a>
+  <a id="req" href="/">Requests</a>
 </nav>
 
 <%= form_tag residences_search_path, :method => 'get' do %>
   <%= text_field_tag :search, params[:search], placeholder: "I'm going to..." %>
   <%= submit_tag "Search", :city => nil %>
 <% end %>
+
+<div id="user_requests" class="displays">
+  <h1>Requests</h1>
+  <ul>
+  <% @requests.each do |request| %>
+    <li>Request from: <%= User.find(request.sender_id).name %></li>
+    <li>They want to stay in: <%= Residence.find(request.residence_id).city %></li>
+    <li>On: <%= request.date %></li>
+    <li>Message: <%= request.text %></li>
+    <br>
+    <%= form_for :pairing, url: pairings_path, method: :post do |f| %>
+      <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
+      <%= hidden_field_tag 'date', "#{request.date}" %>
+      <%= hidden_field_tag 'recipient', "#{@user.id}" %>
+      <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
+      <%= f.submit "Let's do it!" %>
+    <% end %>
+    <%= form_for :request, url: user_request_path(User.find(request.sender_id), request.id), method: :delete  do |f| %>
+      <%= hidden_field_tag 'date', "#{request.date}" %>
+      <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
+      <%= f.submit "No thanks" %>
+    <% end %>
+  <% end %>
+  </ul>
+</div>
 
 <div id="user_messages" class="displays">
   <h1>Messages</h1>
@@ -147,9 +182,9 @@
     <%=link_to "Send 'em a message", new_user_message_path(current_user) %>
       <div id = "<%= message.id%>" >
         <%= form_for :message, url: messages_reply_path do |f| %>
-        <%= f.text_field :text, placeholder: "Hey bro!" %><br>
-        <%= hidden_field_tag 'recipient', "#{message.sender.id}" %>
-        <%= f.submit 'Send message' %>
+          <%= f.text_field :text, placeholder: "Hey bro!" %><br>
+          <%= hidden_field_tag 'recipient', "#{message.sender.id}" %>
+          <%= f.submit 'Send message' %>
         <% end %>
       </div>
     </li>
@@ -223,11 +258,9 @@
 
 <div id="user_availabilities" class="displays">
   <h1>Availabilities</h1>
-  <% i = 0 %>
   <div id="available">
   <% @user.availabilities.each do |availability| %>
-    <p id="<%= availability.date[8, 2] %>" class="id_for_me"><%= availability.id %><p>
-    <% i += 1 %>
+    <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %><p>
   <% end %>
   </div>
   <br>

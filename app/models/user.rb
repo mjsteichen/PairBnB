@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :residences
   has_many :availabilities, through: :residences
   has_many :residence_images, through: :residences, source: :images
+  has_many :sent_requests, class_name: "Request", foreign_key: :sender_id
+  has_many :received_requests, through: :residences, source: :requests
 
   has_secure_password
 end
