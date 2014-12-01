@@ -10,4 +10,11 @@ class ApplicationController < ActionController::Base
   # def current_user
   #   @user ||= User.find(session[:user_id])
   # end
+
+  def signed_in?
+    current_user_id.present?
+  end
+  def current_user_id
+    session[:user_id]
+  end
 end

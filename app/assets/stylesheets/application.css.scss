@@ -25,6 +25,10 @@
   display: none;
 }
 
+#reply_form p{
+  text-align: center
+}
+
 .id_for_me {
   display: none;
 }
@@ -32,6 +36,7 @@
 .bg{
   background-image: url('landing2.jpg');
   background-repeat: no-repeat;
+  background-position: center;
   height:600px;
 
 }
@@ -58,3 +63,5 @@
 #residence_pics img{
   width:400px;
 }
+
+

@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   resources :users do
     resources :messages
     resources :availabilities
-    resources :requests
+    resources :requests, only: [:show, :index]
   end
 
   resources :residences do
     resources :images, only:[:new, :create, :destroy]
+    resources :requests, only: [:create]
   end
 
   resources :pairings do
