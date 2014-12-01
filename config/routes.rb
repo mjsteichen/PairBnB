@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     resources :messages
     resources :availabilities
   end
-  resources :residences
+
+  resources :residences do
+    resources :images, only:[:new, :create, :destroy]
+  end
+
   resources :pairings do
     resources :shoutouts
   end

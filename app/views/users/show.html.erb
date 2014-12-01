@@ -173,12 +173,18 @@
 
   <% @residences.each do |residence| %>
     <% residence.images.each do |image| %>
-      <img src=<%= image.url %>>
+      <img src=<%= image.url %>><br>
+      <%= link_to "remove this picture", residence_image_path(residence, image), method: :delete %><br>
+      <br>
     <% end %>
-    <%= residence.city %>
-    <%= residence.state %>
-    <%= residence.zip_code %>
-    <%= residence.description %>
+      <%= form_for :image, url: residence_images_path(residence.id), method: :post do |f|%>
+        <%=f.text_field :url, placeholder: "paste picture url here"%>
+        <%=f.submit "Upload Picture"%>
+      <%end%>
+    <%= residence.city %><br>
+    <%= residence.state %><br>
+    <%= residence.zip_code %><br>
+    <%= residence.description %><br>
     <%= form_for residence, url: edit_residence_path, method: :get do |f| %>
       <%=hidden_field_tag 'residence', "#{residence.id}" %>
       <%= f.submit %>
