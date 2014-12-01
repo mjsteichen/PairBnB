@@ -1,9 +1,10 @@
-class RequestsController < ActionController::Base
+class RequestsController < ApplicationController
 
   def create
-    if session[:user_id]
+    if signed_in?
       @residence = Residence.find(params[:residence])
-      @request = Request.new(text: params[:request][:text], residence_id: params[:residence], date: params[:date], sender_id: session[:user_id])
+      @availability = @residence.availabilities.find_by(date: params[:date])
+      @request = Request.new(text: params[:request][:text], residence_id: params[:residence], date: params[:date], sender_id: current_user_id)
       @request.save
       redirect_to residence_path(@residence)
     end
@@ -11,9 +12,7 @@ class RequestsController < ActionController::Base
 
   def destroy
     @request = Request.find_by(sender_id: params[:sender], date: params[:date])
-    if @request
-      @request.destroy
-    end
+    @request.try(:destroy)
     redirect_to user_path(User.find(session[:user_id]))
   end
 

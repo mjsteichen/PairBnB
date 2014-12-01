@@ -22,7 +22,7 @@
         var date = dtdate.format(newDate);
         var input = $("<input>", { type: "hidden", name: "date", value: date });
         $("#reply_form").find("#residence").append($(input));
-        $("#reply_form").toggle()
+        $("#reply_form").show()
       });
     });
   });
@@ -50,8 +50,8 @@
       <p><%= @user.specialties %></p>
     <h3>Bio</h3>
       <p><%= @user.bio %></p>
-        <%= link_to 'Github', "https://github.com/'#{@user.github_url}'"%>
-        <%= link_to 'Twitter', "https://twitter.com/'#{@user.twitter_url}'"%><br>
+        <%= link_to 'Github', "https://github.com/#{@user.github_url}"%>
+        <%= link_to 'Twitter', "https://twitter.com/#{@user.twitter_url}"%><br>
       <% if session[:user_id] != nil && session[:user_id] != @user.id %>
         <%= form_for @message, url: new_user_message_path(@user), method: :get do |f| %>
         <%= f.submit 'Send them a message', class: 'btn btn-danger' %>
@@ -71,41 +71,47 @@
       <% end %>
     </div>
     <h3>Upcoming Availability</h3>
-      <% @residence.availabilities.each do |availability| %>
-        <p><%= availability.date %></p>
-      <% end %>
-
-
-    <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
-
-      <div id="leftcolumn" class="yui3-u">
-         <div id="mycalendar"></div>
+    <div class="row">
+      <div class="col-md-3">
+        <% @residence.availabilities.each do |availability| %>
+          <p><%= availability.date %></p>
+        <% end %>
       </div>
-      <div id="rightcolumn" class="yui3-u">
-        <div id="links" style="padding-left:20px;">
-          Selected date: <span id="selecteddate"></span>
+      <div class="col-md-5">
+        <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+
+          <div id="leftcolumn" class="yui3-u">
+             <div id="mycalendar"></div>
+          </div>
+          <div id="rightcolumn" class="yui3-u">
+            <div id="links" style="padding-left:20px;">
+              Selected date: <span id="selecteddate"></span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
     <div id = "reply_form" >
-      <%= form_for :message, url: messages_reply_path do |f| %>
-        <%= f.text_field :text, placeholder: "Hey bro!" %><br>
-        <%= hidden_field_tag 'residence', "#{@residence.id}" %>
-        <%= f.submit 'Send message' %>
-      <% end %>
+      <div class="form-group">
+        <p><strong>Tell them why you want to stay with them! Don't be a stranger!</strong></p>
+        <%= form_for :message, url: residence_requests_path(@residence) do |f| %>
+          <%= f.text_area :text, placeholder: "Hey bro!", class: "form-control" %><br>
+          <%= f.submit 'Request to pair!', class: 'btn btn-danger' %>
+        <% end %>
+      </div>
     </div>
+  </div>
+</div>
       <h3>Shoutouts</h3>
         <% @user.received_shoutouts.each do |shoutout| %>
-          <p><%=shoutout.sender.name%> says... <%= shoutout.text %></p>
+          <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
         <% end %>
+
   </div>
 
-</div>
-<div id = "reply_form" >
-  <%= form_for :request, url: user_requests_path(@user) do |f| %>
-    <%= f.text_field :text, placeholder: "Hey bro!" %><br>
-    <%= hidden_field_tag 'residence', "#{@residence.id}" %>
-    <%= f.submit 'Send request' %>
-  <% end %>
 </div>
 
