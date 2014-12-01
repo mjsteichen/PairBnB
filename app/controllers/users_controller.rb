@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       session.clear
       redirect_to root_path
     else
+      @requests = @user.received_requests.order(:id).reverse_order
       @availabilities = @user.availabilities
       @messages = @user.received_messages.order(:id).reverse_order
       @residences = @user.residences

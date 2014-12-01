@@ -66,9 +66,9 @@
   </div>
 </div>
 <div id = "reply_form" >
-  <%= form_for :message, url: messages_reply_path do |f| %>
+  <%= form_for :request, url: user_requests_path(@user) do |f| %>
     <%= f.text_field :text, placeholder: "Hey bro!" %><br>
     <%= hidden_field_tag 'residence', "#{@residence.id}" %>
-    <%= f.submit 'Send message' %>
+    <%= f.submit 'Send request' %>
   <% end %>
 </div>
