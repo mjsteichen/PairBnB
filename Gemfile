@@ -38,6 +38,7 @@ gem 'pry'
 gem 'faker'
 gem 'rails_12factor', group: :production
 
+gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
   gem 'capybara'
