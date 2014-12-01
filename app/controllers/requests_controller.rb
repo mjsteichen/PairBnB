@@ -2,7 +2,6 @@ class RequestsController < ActionController::Base
 
   def create
     if session[:user_id]
-      binding.pry
       @residence = Residence.find(params[:residence])
       @request = Request.new(text: params[:request][:text], residence_id: params[:residence], date: params[:date], sender_id: session[:user_id])
       @request.save
@@ -15,7 +14,6 @@ class RequestsController < ActionController::Base
     if @request
       @request.destroy
     end
-    binding.pry
     redirect_to user_path(User.find(session[:user_id]))
   end
 
