@@ -1,14 +1,35 @@
-<%= form_tag residences_search_path, :method => 'get' do %>
-  <%= text_field_tag :search, params[:search], placeholder: "I'm going to..." %>
-  <%= submit_tag "Search", :city => nil %>
-<% end %>
+<div class="bg"></div>
+  <div class="jumbotron">
+    <div class="container"></div>
+
+  </div>
+
+
+
+<div id="landing-page"></div>
+<div class="row">
+  <div class="col-xs-2 col-md-4 vcenter"></div>
+  <div class="col-xs-8 col-md-4 vcenter">
+    <%= form_tag residences_search_path, :method => 'get' do %>
+    <div class="form-group">
+      <div class="col-md-10 ">
+      <div class="field form-group">
+        <%= text_field_tag :search, params[:search], placeholder: "I'm going to...", class: 'form-control' %>
+      </div>
+        <%= submit_tag "Search", :city => nil, class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%if session[:user_id] == nil %>
-
   <div class="row">
     <div class="col-xs-2 col-md-4"></div>
     <div class="col-xs-8 col-md-4">
   <%= link_to 'Login', :id => 'loginbar' %>
+  <%= link_to 'Sign Up', new_user_path %>
+<div id="login-landing">
     <%= form_for :session, url: sessions_path do |f| %>
       <% if @error_message %>
         <p><%= @error_message %></p>
@@ -25,6 +46,7 @@
           <%= f.submit 'Login', class: 'btn btn-primary' %>
         </div>
       <% end %>
-        <%= link_to 'Sign Up', new_user_path %>
+
   </div>
 <%end%>
+</div>

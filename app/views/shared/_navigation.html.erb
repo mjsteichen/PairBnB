@@ -1,10 +1,34 @@
 <nav class="navbar navbar-default" role="navigation">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">Pair BnB</a>
-      <% if session[:user_id] != nil%>
-        <a class="navbar-brand" href="/users/<%=session[:user_id]%>">Dashboard</a>
-      <%end%>
     </div>
+    <%= form_tag residences_search_path, :method => 'get', class: "navbar-form navbar-left", role:"search" do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search], placeholder: "I'm going to...", class: 'form-control' %>
+      </div>
+      <%= submit_tag "Search", :city => nil, class: 'btn btn-danger' %>
+      <% end %>
+     </form>
+    <ul class="nav navbar-nav navbar-right">
+      <% if session[:user_id] != nil%>
+        <li><%= link_to 'Dashboard', user_path(current_user) %></li>
+        <li><%= link_to 'Logout', session_path(current_user), method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Login', new_session_path %></li>
+        <li><%= link_to 'Signup', new_user_path %></li>
+      <% end %>
+    </ul>
+
+
+
   </div>
+
 </nav>
+<!--       <% if session[:user_id] != nil%>
+        <li><%= link_to 'Dashboard', user_path(current_user) %></li>
+      <%end%>
+      <% if session[:user_id] %>
+        <li><%= link_to 'Logout', session_path(current_user), method: :delete %></li>
+      <% end %>
+ -->

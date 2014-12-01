@@ -28,3 +28,23 @@
 .id_for_me {
   display: none;
 }
+
+.bg{
+  background-image: url('landing2.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+  height:600px;
+
+}
+.jumbotron{
+  background: transparent;
+  position: fixed;
+  height: 400px;
+
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}

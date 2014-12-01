@@ -1,13 +1,25 @@
-<%= form_for @user do |f| %>
-  <% if @user.errors %>
-    <ul>
-      <% @user.errors.full_messages.each do |error| %>
-      <li><%= error %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <%= f.text_field :name, placeholder: "Name" %><br>
-  <%= f.text_field :email, placeholder: "Email" %><br>
-  <%= f.password_field :password, placeholder: "Password" %><br>
-  <%= f.submit "Sign Up" %><br>
-<% end %>
+<div class="row">
+  <div class="col-xs-2 col-md-4"></div>
+  <div class="col-xs-8 col-md-4">
+  <%= form_for @user do |f| %>
+    <% if @user.errors %>
+      <ul>
+        <% @user.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div class="form-group">
+      <div class="field form-group">
+        <%= f.text_field :name, placeholder: "Name", class: 'form-control' %>
+      </div>
+      <div class="field form-group">
+        <%= f.text_field :email, placeholder: "Email", class: 'form-control' %>
+      </div>
+      <div class="field form-group">
+        <%= f.password_field :password, placeholder: "Password", class: 'form-control' %>
+      </div>
+    <%= f.submit "Sign Up", class: 'btn btn-danger' %><br>
+    <% end %>
+  </div>
+</div>
