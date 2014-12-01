@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(name: params[:user][:name], email: params[:user][:email], github_url: params[:user][:github_url], twitter_url: params[:user][:twitter_url], bio: params[:user][:bio])
+    @user.update!(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password], picture_url: params[:user][:picture_url], github_url: params[:user][:github_url], twitter_url: params[:user][:twitter_url], bio: params[:user][:bio])
     redirect_to user_path(@user)
   end
 
