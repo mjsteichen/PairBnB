@@ -28,3 +28,33 @@
 .id_for_me {
   display: none;
 }
+
+.bg{
+  background-image: url('landing2.jpg');
+  background-repeat: no-repeat;
+  height:600px;
+
+}
+.jumbotron{
+  background: transparent;
+  position: fixed;
+  height: 600px;
+
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+#result-page ul{
+  list-style-type: none;
+}
+
+#residence_user img{
+  height: 300px;
+}
+#residence_pics img{
+  width:400px;
+}
