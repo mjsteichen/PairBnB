@@ -6,17 +6,23 @@
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
       var calendar = new Y.Calendar({
-      contentBox: "#mycalendar",
-      width:'340px',
-      showPrevMonth: true,
-      showNextMonth: true,
-      date: new Date()}).render();
+        contentBox: "#mycalendar",
+        width:'340px',
+        showPrevMonth: false,
+        showNextMonth: false,
+        date: new Date()}).render();
 
       var dtdate = Y.DataType.Date;
 
       calendar.on("selectionChange", function (ev) {
         var newDate = ev.newSelection[0];
         Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+
+        var newDate = ev.newSelection[0];
+        var date = dtdate.format(newDate);
+        var input = $("<input>", { type: "hidden", name: "date", value: date });
+        $("#reply_form").find("#residence").append($(input));
+        $("#reply_form").toggle()
       });
     });
   });
@@ -48,14 +54,21 @@
       <p><%= availability.date %></p>
     <% end %>
 
-    <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+<div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
 
-    <div id="leftcolumn" class="yui3-u">
-       <div id="mycalendar"></div>
-    </div>
-    <div id="rightcolumn" class="yui3-u">
-     <div id="links" style="padding-left:20px;">
-        Selected date: <span id="selecteddate"></span>
-     </div>
+  <div id="leftcolumn" class="yui3-u">
+     <div id="mycalendar"></div>
+  </div>
+  <div id="rightcolumn" class="yui3-u">
+    <div id="links" style="padding-left:20px;">
+      Selected date: <span id="selecteddate"></span>
     </div>
   </div>
+</div>
+<div id = "reply_form" >
+  <%= form_for :message, url: messages_reply_path do |f| %>
+    <%= f.text_field :text, placeholder: "Hey bro!" %><br>
+    <%= hidden_field_tag 'residence', "#{@residence.id}" %>
+    <%= f.submit 'Send message' %>
+  <% end %>
+</div>

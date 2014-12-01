@@ -97,9 +97,9 @@
         };
         if ($("a:contains('Logout')").attr("href").length === 11) {
           var user_id = $("a:contains('Logout')").attr("href").slice(-1)
-      } else {
+        } else {
           var user_id = $("a:contains('Logout')").attr("href").slice(-2)
-      }
+        }
         if (available == "add") {
           $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "#14A714");
           $.ajax({
@@ -128,6 +128,10 @@
   <a id="info" href="/">User Info</a>
 </nav>
 
+<%= form_tag residences_search_path, :method => 'get' do %>
+  <%= text_field_tag :search, params[:search], placeholder: "I'm going to..." %>
+  <%= submit_tag "Search", :city => nil %>
+<% end %>
 
 <div id="user_messages" class="displays">
   <h1>Messages</h1>
