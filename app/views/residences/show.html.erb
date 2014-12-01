@@ -21,7 +21,7 @@
         var newDate = ev.newSelection[0];
         var date = dtdate.format(newDate);
         var input = $("<input>", { type: "hidden", name: "date", value: date });
-        $("#reply_form").find("#residence").append($(input));
+        $("#reply_form").find("#request_text").append($(input));
         $("#reply_form").show()
       });
     });
@@ -90,7 +90,6 @@
           </div>
         </div>
       </div>
-<<<<<<< HEAD
     <div class="col-md-4"></div>
   </div>
   <div class="row">
@@ -99,27 +98,18 @@
     <div id = "reply_form" >
       <div class="form-group">
         <p><strong>Tell them why you want to stay with them! Don't be a stranger!</strong></p>
-        <%= form_for :message, url: residence_requests_path(@residence) do |f| %>
+        <%= form_for :request, url: residence_requests_path(@residence) do |f| %>
           <%= f.text_area :text, placeholder: "Hey bro!", class: "form-control" %><br>
           <%= f.submit 'Request to pair!', class: 'btn btn-danger' %>
-=======
-    </div>
-      <div id = "reply_form" >
-        <%= form_for :request, url: user_requests_path(@user) do |f| %>
-          <%= f.text_field :text, placeholder: "Hey bro!" %><br>
-          <%= hidden_field_tag 'residence', "#{@residence.id}" %>
-          <%= f.submit 'Send request' %>
->>>>>>> removes add/remove  buttons from top of calendar; begins work on toggling dates' color
         <% end %>
       </div>
     </div>
   </div>
 </div>
-      <h3>Shoutouts</h3>
-        <% @user.received_shoutouts.each do |shoutout| %>
-          <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
-        <% end %>
-
+  <h3>Shoutouts</h3>
+  <% @user.received_shoutouts.each do |shoutout| %>
+    <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
+  <% end %>
   </div>
 
 </div>

@@ -169,7 +169,7 @@
       <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
       <%= f.submit "Let's do it!" %>
     <% end %>
-    <%= form_for :request, url: user_request_path(User.find(request.sender_id), request.id), method: :delete  do |f| %>
+    <%= form_for :request, url: residence_request_path(Residence.find(request.residence_id), request.id), method: :delete  do |f| %>
       <%= hidden_field_tag 'date', "#{request.date}" %>
       <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
       <%= f.submit "No thanks" %>
