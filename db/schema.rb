@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141127012509) do
     t.integer  "recipient_id"
     t.string   "text"
     t.boolean  "read?",        default: false
+    t.boolean  "request?",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

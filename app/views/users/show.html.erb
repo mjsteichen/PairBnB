@@ -88,12 +88,12 @@
 
         var newDate = ev.newSelection[0];
         var date = dtdate.format(newDate);
-        if (date.slice(8, 9) === '0') {
-          var day = date.slice(9, 10);
-          var day_id = "#" + day
+        var day = date.slice(8, 10);
+        var day_id = "#" + day;
+        if (day[0] === "0") {
+          var day_selector = "_" + day[1];
         } else {
-          var day = date.slice(8, 10);
-          var day_id = "#" + day
+          var day_selector = "_" + day;
         };
         if ($("a:contains('Logout')").attr("href").length === 11) {
           var user_id = $("a:contains('Logout')").attr("href").slice(-1)
@@ -101,16 +101,20 @@
           var user_id = $("a:contains('Logout')").attr("href").slice(-2)
         }
         if (available == "add") {
-          $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "#14A714");
-          $.ajax({
+          $("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").css("background-color", "#14A714");
+          var request = $.ajax({
             url: "/users/" + user_id + "/availabilities",
             type: "POST",
-            data: { date: date, residence: residence}
+            data: { date: date, residence: residence }
           });
+          request.done(function(response) {
+            if (response["id"]) {
+              $("#available").append("<p id= " + response['day'] + " class='id_for_me'>" + response['id'] + "<p>");
+            }
+          })
         } else {
-          $("td").filter(function( index ) { return $(this).text() === day; }).css("background-color", "white");
-          // console.log($(day_id).text());
-          $.ajax({
+          $("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").css("background-color", "white");
+          var request = $.ajax({
             url: "/users/" + user_id + "/availabilities/" + $(day_id).text(),
             type: "DELETE"
           });
@@ -220,10 +224,12 @@
 <div id="user_availabilities" class="displays">
   <h1>Availabilities</h1>
   <% i = 0 %>
+  <div id="available">
   <% @user.availabilities.each do |availability| %>
     <p id="<%= availability.date[8, 2] %>" class="id_for_me"><%= availability.id %><p>
     <% i += 1 %>
   <% end %>
+  </div>
   <br>
   <button id="add" type="button">Add Availabilities</button>
   <button id="remove" type="button">Remove Availabilities</button>

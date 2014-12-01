@@ -5,6 +5,7 @@ class CreateMessages < ActiveRecord::Migration
       t.belongs_to :recipient
       t.string :text
       t.boolean :read?, default: false
+      t.boolean :request?, default: false
 
       t.timestamps
     end
