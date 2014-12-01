@@ -34,7 +34,7 @@
 }
 
 .id_for_me {
-  display: none;
+  display: block;
 }
 
 .bg{
@@ -44,6 +44,7 @@
   height:600px;
 
 }
+
 .jumbotron{
   background: transparent;
   position: fixed;
@@ -68,4 +69,6 @@
   width:400px;
 }
 
+.available {
 
+}

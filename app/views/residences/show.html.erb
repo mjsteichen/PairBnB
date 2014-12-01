@@ -90,6 +90,7 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     <div class="col-md-4"></div>
   </div>
   <div class="row">
@@ -101,6 +102,14 @@
         <%= form_for :message, url: residence_requests_path(@residence) do |f| %>
           <%= f.text_area :text, placeholder: "Hey bro!", class: "form-control" %><br>
           <%= f.submit 'Request to pair!', class: 'btn btn-danger' %>
+=======
+    </div>
+      <div id = "reply_form" >
+        <%= form_for :request, url: user_requests_path(@user) do |f| %>
+          <%= f.text_field :text, placeholder: "Hey bro!" %><br>
+          <%= hidden_field_tag 'residence', "#{@residence.id}" %>
+          <%= f.submit 'Send request' %>
+>>>>>>> removes add/remove  buttons from top of calendar; begins work on toggling dates' color
         <% end %>
       </div>
     </div>
