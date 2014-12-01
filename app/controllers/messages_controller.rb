@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
       if params[:residence]
         @residence = Residence.find(params[:residence])
         @recipient = @residence.user
-        @message = Message.new(recipient_id: @recipient.id, text: params[:message][:text] + " Residence: " + params[:residence] + " Date: " + params[:date], sender_id: session[:user_id])
+        @message = Message.new(recipient_id: @recipient.id, request?: true, text: params[:message][:text] + " Residence: " + params[:residence] + " Date: " + params[:date], sender_id: session[:user_id])
         @message.save
         redirect_to residence_path(@residence)
       else

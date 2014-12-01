@@ -3,9 +3,12 @@ class AvailabilitiesController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     if Availability.where(date: params[:date]).length == 0
-      Availability.create!(residence_id: @user.residences[params[:residence].to_i].id, date: params[:date])
+      availability = Availability.create!(residence_id: @user.residences[params[:residence].to_i].id, date: params[:date])
+      day = availability.date[-2..-1]
+      render json: { id: availability.id, day: day }
+    else
+      redirect_to user_path(@user)
     end
-    redirect_to user_path(@user)
   end
 
   def destroy
@@ -18,3 +21,5 @@ class AvailabilitiesController < ApplicationController
   end
 
 end
+
+
