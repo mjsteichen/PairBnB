@@ -1,8 +1,9 @@
 require 'rails_helper'
 
+
 feature "user sessions" do
   before do
-    User.create!(name: "test person", email: "test@gmail.com", password: "testing123" )
+    @user = User.create!(name: "test person", email: "test@gmail.com", password: "testing123" )
   end
   scenario "when user logs in" do
     visit '/'
@@ -50,4 +51,14 @@ feature "user sessions" do
     click_on 'Pair BnB'
     expect(page).not_to have_text('Login')
   end
+
+  scenario "dashboard is rendered properly" do
+    visit '/'
+    fill_in 'email', :with => "test@gmail.com"
+    fill_in 'password', :with => 'testing123'
+    click_button 'Login'
+    visit user_path(@user)
+    expect(page).to have_text('Availabilities')
+  end
+
 end

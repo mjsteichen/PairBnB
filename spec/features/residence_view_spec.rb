@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 feature 'residences' do
   before do
     @user = User.create!(name: "test person", email: "test@gmail.com", password: "testing123", picture_url: "google.com")
@@ -9,8 +10,8 @@ feature 'residences' do
 
   scenario "when user searches for a location but none exist" do
     visit '/'
-    fill_in "I'm going to...", :with => "New York"
-    click_button 'Search'
+    fill_in "I'm going to...", :with => "New York", :match => :first
+    click_button 'Search', :match => :first
     expect(page).to have_text("Sorry! No pairs in that neck of the woods.")
   end
 

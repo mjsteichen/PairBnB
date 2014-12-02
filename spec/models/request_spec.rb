@@ -1,5 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Request, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+describe Request do
+  describe "#associations" do
+    it { should belong_to(:sender) }
+    it { should belong_to(:residence) }
+  end
 end
