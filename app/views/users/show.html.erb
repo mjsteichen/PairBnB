@@ -62,16 +62,6 @@
       $("td").css("background-color", "white")
     });
 
-    var divLength = $("#available p").length
-    for (var i = 0; i < divLength; i++) {
-      var availableDay = $("#available p")[i].id
-      if (availableDay[0] === "0") {
-        availableDay = availableDay[1];
-      }
-      availableDay = "_" + availableDay
-      console.log(availableDay)
-    }
-
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
       // Create a new instance of calendar, placing it in
@@ -88,6 +78,16 @@
 
       // Get a reference to Y.DataType.Date
       var dtdate = Y.DataType.Date;
+
+      var divLength = $("#available p").length
+      for (var i = 0; i < divLength; i++) {
+        var availableDay = $("#available p")[i].id
+        if (availableDay[0] === "0") {
+          availableDay = availableDay[1];
+        }
+        availableDay = "_" + availableDay;
+        $("td[id$='" + availableDay + "']:not(.yui3-calendar-column-hidden)").addClass("available").css("background-color", "#14A714")
+      }
 
       // Listen to calendar's selectionChange event.
       calendar.on("selectionChange", function (ev) {
