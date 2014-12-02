@@ -4,6 +4,9 @@ describe ResidencesController do
   let!(:test_user) {User.create!(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")}
   let!(:residence) {Residence.create!(user: test_user, city: "Chicago", state: "IL", zip_code: "12345", description: "It's hella decent" )}
 
+  it { should route(:get, '/residences').to(action: :index) }
+  it { should route(:get, '/residences/1').to(action: :show, id: 1) }
+
   describe 'GET #index' do
     it 'assigns all the residences as @residences' do
       get :index
