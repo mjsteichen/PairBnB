@@ -1,10 +1,17 @@
-<%= form_for @user, method: :put do |f| %>
-  <%= f.text_field :name, placeholder: @user.name %><br>
-  <%= f.text_field :email, placeholder: @user.email %><br>
-  <%= f.password_field :password, placeholder: 'Password' %><br>
-  <%= f.text_field :picture_url, placeholder: 'Picture URL' %><br>
-  <%= f.text_field :github_url, placeholder: "Github url" %><br>
-  <%= f.text_field :twitter_url, placeholder: "Twitter url" %><br>
-  <%= f.text_field :bio, placeholder: "Bio" %><br>
-  <%= f.submit "Update your profile" %>
-<% end %>
+<div class="col-xs-2 col-md-4"></div>
+  <div class="col-xs-8 col-md-4">
+<h1>Edit your profile</h1>
+    <div class="form-group">
+    <%= form_for @user, method: :put do |f| %>
+      <%= f.text_field :name, placeholder: @user.name, class: 'form-control' %>
+      <%= f.text_field :email, placeholder: @user.email, class: 'form-control' %>
+      <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+      <%= f.text_field :picture_url, placeholder: 'Picture URL', class: 'form-control' %>
+      <%= f.text_field :github_url, placeholder: "Github url", class: 'form-control' %>
+      <%= f.text_field :twitter_url, placeholder: "Twitter url", class: 'form-control' %>
+      <%= f.text_field :bio, placeholder: "Bio", class: 'form-control' %>
+      <%= f.submit "Update your profile", class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+  </div>
+</div>
