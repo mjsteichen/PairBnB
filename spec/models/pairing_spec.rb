@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 describe Pairing do
   let(:emily) { User.create!(name: "emily", email: "emily@emily.com", password: "password")}
   let(:michael) { User.create!(name: "michael", email: "michael@michael.com", password: "password")}

@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 describe User do
   let(:emily) { User.new(name: "emily", email: "emily@emily.com", password: "password")}
 

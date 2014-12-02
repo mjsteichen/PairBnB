@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 feature "user sessions" do
   before do
     @user = User.create!(name: "test person", email: "test@gmail.com", password: "testing123" )
