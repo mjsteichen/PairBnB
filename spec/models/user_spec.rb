@@ -29,17 +29,19 @@ describe User do
       expect(@fake_user.save).to be_falsey
     end
 
-    it { should have_many(:sent_messages)}
-    it { should have_many(:received_messages)}
-    it { should have_many(:sent_shoutouts)}
-    it { should have_many(:received_shoutouts)}
-    it { should have_many(:hosted_pairings)}
-    it { should have_many(:visited_pairings)}
-    it { should have_many(:residences)}
-    it { should have_many(:availabilities)}
-    it { should have_many(:residence_images)}
     it { should have_secure_password }
 
+    describe "#associations" do
+      it { should have_many(:sent_messages)}
+      it { should have_many(:received_messages)}
+      it { should have_many(:sent_shoutouts)}
+      it { should have_many(:received_shoutouts)}
+      it { should have_many(:hosted_pairings)}
+      it { should have_many(:visited_pairings)}
+      it { should have_many(:residences)}
+      it { should have_many(:availabilities)}
+      it { should have_many(:residence_images)}
+      end
   end
 
 end
