@@ -105,6 +105,7 @@
       </div>
     <div class="col-md-4"></div>
   </div>
+  <% if session[:user_id] != nil && session[:user_id] != @user.id %>
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-6">
@@ -118,7 +119,8 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
+  <% end %>
   <h3>Shoutouts</h3>
   <% @user.received_shoutouts.each do |shoutout| %>
     <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
