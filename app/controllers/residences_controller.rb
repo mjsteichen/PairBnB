@@ -4,7 +4,7 @@ class ResidencesController < ApplicationController
   end
 
   def search
-    @residences = Residence.where(city: params[:search])
+    @residences = Residence.where(city: params[:search].capitalize)
     if @residences.length == 0
       flash.now[:notice] = "Sorry! No pairs in that neck of the woods."
     end

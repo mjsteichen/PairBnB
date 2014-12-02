@@ -37,13 +37,7 @@
   display: none;
 }
 
-.bg{
-  background-image: url('landing3.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  height:600px;
 
-}
 
 .jumbotron{
   background: transparent;
@@ -86,4 +80,17 @@
   font-size: 1.25em;
 }
 
+.row {
+  padding-top: 10px;
+}
+.dashboard{
+  background:#bdc3c7;
+  height: 600px;
+}
+.dashboard ul{
+  width: 600px;
+}
+.dashboard h1{
+  text-align: center;
+}
 
