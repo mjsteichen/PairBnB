@@ -14,15 +14,17 @@
 
       var dtdate = Y.DataType.Date;
 
-      var divLength = $("#available p").length
-      for (var i = 0; i < divLength; i++) {
-        var availableDay = $("#available p")[i].id
-        if (availableDay[0] === "0") {
-          availableDay = availableDay[1];
-        }
-        availableDay = "_" + availableDay;
+      $.each($("#available p"), function(index, element) {
+        availableDay = $(element).attr("id")
+        availableDay = "_" + +availableDay;
         $("td[id$='" + availableDay + "']:not(.yui3-calendar-column-hidden)").addClass("available").css("background-color", "#14A714")
-      }
+      });
+
+      $.each($("#booked p"), function(index, element) {
+        bookedDay = $(element).attr("id")
+        bookedDay = "_" + +bookedDay;
+        $("td[id$='" + bookedDay + "']:not(.yui3-calendar-column-hidden)").addClass("booked").css("background-color", "#C9302C")
+      })
 
       calendar.on("selectionChange", function (ev) {
         var newDate = ev.newSelection[0];
@@ -30,9 +32,13 @@
 
         var newDate = ev.newSelection[0];
         var date = dtdate.format(newDate);
-        var input = $("<input>", { type: "hidden", name: "date", value: date });
-        $("#reply_form").find("#request_text").append($(input));
-        $("#reply_form").show()
+        var day = date.slice(-2);
+        var day_selector = +day;
+        if ($("td[id$='_" + day_selector + "']:not(.yui3-calendar-column-hidden)").hasClass("available")) {
+          var input = $("<input>", { type: "hidden", name: "date", value: date });
+          $("#reply_form").find("#request_text").append($(input));
+          $("#reply_form").show()
+        };
       });
     });
   });
@@ -86,7 +92,16 @@
       <div class="col-md-3">
         <div id="available">
           <% @residence.availabilities.each do |availability| %>
-            <p id="<%= availability.date[-2..-1] %>"><%= availability.id %></p>
+            <% if availability.booked == false %>
+              <p id="<%= availability.date[-2..-1] %>"><%= availability.id %></p>
+            <% end %>
+          <% end %>
+        </div>
+        <div id="booked">
+          <% @residence.availabilities.each do |availability| %>
+            <% if availability.booked %>
+              <p id="<%= availability.date[-2..-1] %>"><%= availability.id %></p>
+            <% end %>
           <% end %>
         </div>
       </div>
