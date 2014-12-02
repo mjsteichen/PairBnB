@@ -1,10 +1,4 @@
 class ShoutoutsController < ApplicationController
-  def index
-  end
-
-  def show
-
-  end
 
   def new
     @shoutout = Shoutout.new
@@ -20,4 +14,6 @@ class ShoutoutsController < ApplicationController
 
   end
 
+  def destroy
+  end
 end

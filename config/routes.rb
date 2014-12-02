@@ -5,10 +5,10 @@ Rails.application.routes.draw do
 
   post 'messages/reply' => 'messages#reply'
 
-  resources :sessions, only:[:new, :create, :destroy]
-  resources :users do
-    resources :messages
-    resources :availabilities
+  resources :sessions, only:[:create, :destroy]
+  resources :users, except: [:index] do
+    resources :messages, only: [:new, :create, :destroy]
+    resources :availabilities, only: [:create, :destroy]
     resources :requests, only: [:show, :index]
   end
 
@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     resources :requests, only: [:create]
   end
 
-  resources :pairings do
-    resources :shoutouts
+  resources :pairings, only: [:create] do
+    resources :shoutouts, only: [:new, :create, :destroy]
   end
 
   # You can have the root of your site routed with "root"
