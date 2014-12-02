@@ -20,30 +20,41 @@
 
     $(".displays").hide();
     $("#user_availabilities").show();
+
     $("#req").click(function(event) {
       event.preventDefault();
       $(".displays").hide();
-      $("#user_requests").show()
+      $("#user_requests").show();
+      $(".nav-pills li").removeClass("active");
+      $(this).addClass("active")
     });
     $("#mess").click(function(event) {
       event.preventDefault();
       $(".displays").hide();
-      $("#user_messages").show()
+      $("#user_messages").show();
+      $(".nav-pills li").removeClass("active");
+      $(this).addClass("active")
     });
     $("#res").click(function(event) {
       event.preventDefault();
       $(".displays").hide();
-      $("#user_residences").show()
+      $("#user_residences").show();
+      $(".nav-pills li").removeClass("active");
+      $(this).addClass("active")
     });
     $("#avail").click(function(event) {
       event.preventDefault();
       $(".displays").hide();
-      $("#user_availabilities").show()
+      $("#user_availabilities").show();
+      $(".nav-pills li").removeClass("active");
+      $(this).addClass("active")
     });
     $("#info").click(function(event) {
       event.preventDefault();
       $(".displays").hide();
-      $("#user_information").show()
+      $("#user_information").show();
+      $(".nav-pills li").removeClass("active");
+      $(this).addClass("active")
     });
 
     $("#add").click(function(event) {
@@ -157,7 +168,7 @@
           <ul class="nav nav-pills">
             <li role ="presentation" id="mess"><a href="/">Messages</a></li>
             <li role ="presentation" id="res"><a href="/">Your Place</a></li>
-            <li role ="presentation" class="active" id="avail"><a href="/">Availabilities</a></li>
+            <li role ="presentation" class="active" id="avail"><a href="/">My Availabilities</a></li>
             <li role ="presentation" id="info"><a href="/">User Info</a></li>
             <li role ="presentation" id="req"><a href="/">Requests</a></li>
           </ul>
@@ -165,12 +176,16 @@
   </div>
 
 
-
   <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8">
+    <div class="col-md-8"> <!-- my child lives on line 288 -->
+
     <div id="user_requests" class="displays">
       <h1>Requests</h1>
+      <% if @requests.length == 0 %>
+        <br>
+        <h4>Sorry, doesn't look like you have any requests yet!</h4>
+      <% end %>
       <ul>
       <% @requests.each do |request| %>
         <li>Request from: <%= User.find(request.sender_id).name %></li>
@@ -197,6 +212,10 @@
 
     <div id="user_messages" class="displays">
       <h1>Messages</h1>
+      <% if @messages.length == 0 %>
+        <br>
+        <h4>Sorry, doesn't look like you have any messages yet!</h4>
+      <% end %>
       <ul class="received_messages">
       <% @messages.each do |message| %>
         <li>From: <%= message.sender.name %><br>
@@ -216,10 +235,10 @@
     </ul>
     </div>
 
-    <div id="user_residences" class="displays">
+  <div id="user_residences" class="displays">
     <h1>Your Place</h1>
       <% if @residences.length == 0%>
-        <%= link_to 'Add your place' %><br>
+        <h4>Hey this page looks pretty empty to me... <%= link_to 'Add your place!' %></h4>
         <div id = "add_place" >
         <%= form_for @residence, url: residences_path, method: :post do |f| %>
           <% if @residence.errors %>
@@ -236,6 +255,7 @@
           <%= f.submit 'List your place' %>
         <% end %>
       <% end %>
+    </div>
       <div class="row">
       <div class="col-md-6">
       <% @residences.each do |residence| %>
@@ -265,6 +285,7 @@
       <% end %>
     </div>
   </div>
+</div> <!-- my parent lives on line 181 it is a col md 8 closeish to h1 Requests <3 <3 -->
 
 
     <div id="user_information" class="displays">
@@ -319,9 +340,12 @@
            <div id="mycalendar"></div>
         </div>
       </div>
+    <div id="color_key">
+      <h4><span class="white_text">Unavailable</span> - <span class="green_text">Available</span> - <span class="red_text">Booked</span></h4>
+    </div>
     </div>
   </div>
 </div>
 </div>
-</div>
+
 

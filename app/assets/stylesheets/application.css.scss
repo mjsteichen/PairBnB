@@ -96,6 +96,10 @@
   text-align: center;
 }
 
+.dashboard h4{
+  text-align: center;
+}
+
 #valid_date_alert {
   display: none;
 }
@@ -106,5 +110,17 @@
 
 #user_id {
   display: none;
+}
+
+.red_text {
+  color: #C9302C;
+}
+
+.green_text {
+  color: #14A714;
+}
+
+.white_text {
+  color: white;
 }
 
