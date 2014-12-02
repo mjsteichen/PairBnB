@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :require_authented only: [:new, :create]
+
   def new
     if session[:user_id] == nil
       @user = User.new

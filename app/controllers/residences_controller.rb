@@ -1,4 +1,6 @@
 class ResidencesController < ApplicationController
+  skip_before_filter :require_authented only: [:search, :index, :show]
+
   def index
     @residences = Residence.all
   end

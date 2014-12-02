@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    add_place_link = $("a:contains('Add your place')");
+    var add_place_link = $("a:contains('Add your place')");
     add_place_link.on('click', function(event){
       event.preventDefault();
       $('#add_place').css('display', 'block')
@@ -66,6 +66,31 @@
       $(this).parent().hide();
     })
 
+    function loadMonth(month, year) {
+      var request = $.ajax({url: "/month_data",
+              dataType: "json",
+              data: {month: month, year: year}});
+
+      // response:
+      // [day: 1, {status: 'available', availability_id: 12},
+      //  day: 2, {status: 'booked', availability_id: 13, pairing_id: 3},
+      //  day: 3, {status: 'booked', availability_id: 14, pairing_id: 4}
+      // ]
+      request.done(function(response) {
+        _.each(response, function(day) {
+          var dayElement = $("td[id$='" + day.day + "']:not(.yui3-calendar-column-hidden)");
+          if(day.status === 'booked') {
+            dayElement.addClass("booked").css("background-color", "#C9302C")
+          } else if(day.statys === 'available') {
+
+          }
+        });
+      });
+    }
+
+
+
+
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
       // Create a new instance of calendar, placing it in
@@ -83,6 +108,8 @@
       // Get a reference to Y.DataType.Date
       var dtdate = Y.DataType.Date;
 
+
+      // Most of the code below would be moved up to the new function loadMonth
       $.each($("#available p"), function(index, element) {
         availableDay = $(element).attr("id")
         availableDay = "_" + +availableDay;
@@ -103,17 +130,21 @@
         return user_id;
       }
 
+      // moved because we only need to set these bindings once
+      // consider delegated binding if clicking stops working after
+      // moving forward/backward one month
+      $(".yui3-calendarnav-nextmonth").click(function(event) {
+        loadMonth(12, 2014);
+      });
+
+      $(".yui3-calendarnav-prevmonth").click(function(event) {
+        loadMonth(12, 2014);
+      });
+
+
       // Listen to calendar's selectionChange event.
       calendar.on("selectionChange", function (ev) {
         ev.preventDefault();
-
-        $(".yui3-calendarnav-nextmonth").click(function(event) {
-          $("td").css("background-color", "white")
-        });
-
-        $(".yui3-calendarnav-prevmonth").click(function(event) {
-          $("td").css("background-color", "white")
-        });
 
         var newDate = ev.newSelection[0];
         var date = dtdate.format(newDate);
@@ -122,29 +153,29 @@
         var day_selector = +day; // convert possible leading-zero, single-digit to integer (+"01" = 1)
 
         var selected_day_node = $("td[id$='_" + day_selector + "']:not(.yui3-calendar-column-hidden):not(.booked)");
-        $.each(selected_day_node, function(index, node){
-          var user_id = currentUserId();
-          node = $(node);
-          if (node.hasClass("available")) {
-            node.removeClass("available").css("background-color", "white");
-            var request = $.ajax({
-              url: "/users/" + user_id + "/availabilities/" + $(day_id).text(),
-              type: "DELETE"
-            });
-          } else {
-            node.addClass("available").css("background-color", "#14A714");
-            var request = $.ajax({
-              url: "/users/" + user_id + "/availabilities",
-              type: "POST",
-              data: { date: date}
-            });
-            request.done(function(response) {
-              if (response["id"]) {
-                $("#available").append("<p id= " + response['day'] + " class='id_for_me'>" + response['id'] + "</p>");
-              }
-            });
-          }
-        });
+        var node = $(selected_day_node[0]);
+
+        var user_id = currentUserId();
+
+        if (node.hasClass("available")) {
+          node.removeClass("available").css("background-color", "white");
+          var request = $.ajax({
+            url: "/users/" + user_id + "/availabilities/" + $(day_id).text(),
+            type: "DELETE"
+          });
+        } else {
+          node.addClass("available").css("background-color", "#14A714");
+          var request = $.ajax({
+            url: "/users/" + user_id + "/availabilities",
+            type: "POST",
+            data: { date: date}
+          });
+          request.done(function(response) {
+            if (response["id"]) {
+              $("#available").append("<p id= " + response['day'] + " class='id_for_me'>" + response['id'] + "</p>");
+            }
+          });
+        }
       });
     });
   });
