@@ -1,7 +1,6 @@
 class RequestsController < ApplicationController
 
   def create
-    binding.pry
     if signed_in?
       @residence = Residence.find(params[:residence_id])
       @availability = @residence.availabilities.find_by(date: params[:date])

@@ -19,8 +19,6 @@ User.create!(name: "Dave Hoover", email: "dave@hoover.com", password: "catscats"
 
   User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: "password", picture_url: Faker::Avatar.image(Faker::Lorem.word, "150x150"), bio: Faker::Lorem.sentences(4).join(" "), specialties: Faker::Lorem.sentence(3), github_url: Faker::Lorem.word + "github.io", twitter_url: "http://twitter.com/" + Faker::Lorem.word)
 
-  Residence.create!(user_id: rand(24) + 1, city: Faker::Address.city, state: Faker::Address.state, zip_code: Faker::Address.zip, neighborhood: Faker::Address.street_name, description: Faker::Lorem.sentences(4).join(" "))
-
   Pairing.create!(host_id: rand(12) + 1, visitor_id: (rand(12) + 13))
 
   Availability.create!(residence_id: rand(24) + 1, pairing_id: rand(24) + 1, date: Faker::Date.forward(30))
@@ -32,7 +30,8 @@ User.create!(name: "Dave Hoover", email: "dave@hoover.com", password: "catscats"
   Image.create!(residence_id: rand(24) + 1, url: Faker::Avatar.image(Faker::Lorem.word, "150x150"))
 
 end
-
-Residence.all.each do |residence|
-  residence.images.create!(url: Faker::Avatar.image(Faker::Lorem.word, "150x150"))
+i = 0
+User.all.each do |user|
+  i += 1
+  Residence.create!(user_id: i, city: Faker::Address.city, state: Faker::Address.state, zip_code: Faker::Address.zip, neighborhood: Faker::Address.street_name, description: Faker::Lorem.sentences(4).join(" "))
 end

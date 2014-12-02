@@ -62,6 +62,10 @@
       $("td").css("background-color", "white")
     });
 
+    $(".accept_pair").submit(function() {
+      $(this).parent().hide();
+    })
+
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
       // Create a new instance of calendar, placing it in
@@ -126,7 +130,7 @@
           var request = $.ajax({
             url: "/users/" + user_id + "/availabilities",
             type: "POST",
-            data: { date: date, residence: residence }
+            data: { date: date}
           });
           request.done(function(response) {
             if (response["id"]) {
@@ -142,7 +146,7 @@
 
 <nav>
   <a id="mess" href="/">Messages</a>
-  <a id="res" href="/">Residences</a>
+  <a id="res" href="/">Your Place</a>
   <a id="avail" href="/">Availabilities</a>
   <a id="info" href="/">User Info</a>
   <a id="req" href="/">Requests</a>
@@ -162,11 +166,12 @@
     <li>On: <%= request.date %></li>
     <li>Message: <%= request.text %></li>
     <br>
-    <%= form_for :pairing, url: pairings_path, method: :post do |f| %>
+    <%= form_for :pairing, :html => {:class => "accept_pair"}, url: pairings_path, method: :post do |f| %>
       <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
       <%= hidden_field_tag 'date', "#{request.date}" %>
       <%= hidden_field_tag 'recipient', "#{@user.id}" %>
       <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
+      <%= hidden_field_tag 'request', "#{request.id}" %>
       <%= f.submit "Let's do it!" %>
     <% end %>
     <%= form_for :request, url: residence_request_path(Residence.find(request.residence_id), request.id), method: :delete  do |f| %>
@@ -200,26 +205,25 @@
 </div>
 
 <div id="user_residences" class="displays">
-  <h1>Residences</h1>
-      <%= link_to 'Add your place' %><br>
-      <div id = "add_place" >
-        <%= form_for @residence, url: residences_path, method: :post do |f| %>
-        <% if @residence.errors %>
-          <ul>
-            <% @residence.errors.full_messages.each do |error| %>
+<h1>Your Place</h1>
+  <% if @residences.length == 0%>
+    <%= link_to 'Add your place' %><br>
+    <div id = "add_place" >
+    <%= form_for @residence, url: residences_path, method: :post do |f| %>
+      <% if @residence.errors %>
+        <ul>
+          <% @residence.errors.full_messages.each do |error| %>
             <li><%= error %></li>
-            <% end %>
-          </ul>
-        <% end %>
+          <% end %>
+        </ul>
+      <% end %>
       <%= f.text_field :city, placeholder: "City" %><br>
       <%= f.text_field :state, placeholder: "State" %><br>
       <%= f.text_field :zip_code, placeholder: "Zipcode" %><br>
       <%= f.text_field :description, placeholder: "House Description & Rules" %><br>
       <%= f.submit 'List your place' %>
     <% end %>
-  </div>
-
-
+  <% end %>
   <% @residences.each do |residence| %>
     <% residence.images.each do |image| %>
       <img src=<%= image.url %>><br>
@@ -270,11 +274,6 @@
   <% end %>
   </div>
   <br>
-  <% i = 0 %>
-  <% @residences.each do |residence| %>
-    <% i += 1 %>
-    <button class="residence" id="res_<%= i %>" type="button">Manage Residence <%= i %></button>
-  <% end %>
   <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
 
     <div id="leftcolumn" class="yui3-u">

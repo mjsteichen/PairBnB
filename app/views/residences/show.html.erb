@@ -14,6 +14,16 @@
 
       var dtdate = Y.DataType.Date;
 
+      var divLength = $("#available p").length
+      for (var i = 0; i < divLength; i++) {
+        var availableDay = $("#available p")[i].id
+        if (availableDay[0] === "0") {
+          availableDay = availableDay[1];
+        }
+        availableDay = "_" + availableDay;
+        $("td[id$='" + availableDay + "']:not(.yui3-calendar-column-hidden)").addClass("available").css("background-color", "#14A714")
+      }
+
       calendar.on("selectionChange", function (ev) {
         var newDate = ev.newSelection[0];
         Y.one("#selecteddate").setHTML(dtdate.format(newDate));
@@ -27,6 +37,7 @@
     });
   });
 </script>
+
 <div class="row">
   <div class="col-md-2">
     <%= link_to 'Back to Search', :back%>
@@ -73,9 +84,11 @@
     <h3>Upcoming Availability</h3>
     <div class="row">
       <div class="col-md-3">
-        <% @residence.availabilities.each do |availability| %>
-          <p><%= availability.date %></p>
-        <% end %>
+        <div id="available">
+          <% @residence.availabilities.each do |availability| %>
+            <p id="<%= availability.date[-2..-1] %>"><%= availability.id %></p>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-5">
         <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
