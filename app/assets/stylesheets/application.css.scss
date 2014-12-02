@@ -1,9 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-#login-landing{
-  display: none;
-}
+
 
 #add_place {
   display: none;
@@ -77,6 +75,7 @@
 
 .landing-h1 h1{
   font-size: 7em;
+  padding-top: 50%;
 }
 
 .landing-h1 p{
@@ -95,6 +94,7 @@
 }
 .dashboard h1{
   text-align: center;
+}
 
 #valid_date_alert {
   display: none;
