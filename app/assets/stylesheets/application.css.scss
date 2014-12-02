@@ -38,7 +38,7 @@
 }
 
 .bg{
-  background-image: url('landing2.jpg');
+  background-image: url('landing3.jpg');
   background-repeat: no-repeat;
   background-position: center;
   height:600px;
@@ -48,7 +48,7 @@
 .jumbotron{
   background: transparent;
   position: fixed;
-  height: 600px;
+  height: 200px;
 
 }
 
@@ -76,3 +76,14 @@
 #available {
   display: none;
 }
+
+
+.landing-h1 h1{
+  font-size: 7em;
+}
+
+.landing-h1 p{
+  font-size: 1.25em;
+}
+
+
