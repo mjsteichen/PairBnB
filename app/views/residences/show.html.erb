@@ -28,19 +28,23 @@
 
       calendar.on("selectionChange", function (ev) {
         var newDate = ev.newSelection[0];
-        Y.one("#selecteddate").setHTML(dtdate.format(newDate));
-
-        var newDate = ev.newSelection[0];
         var date = dtdate.format(newDate);
         var day = date.slice(-2);
         var day_selector = +day;
-        if ($("td[id$='_" + day_selector + "']:not(.yui3-calendar-column-hidden)").hasClass("available")) {
-          var input = $("<input>", { type: "hidden", name: "date", value: date });
-          $("#reply_form").find("#request_text").append($(input));
-          $("#reply_form").show()
+        if ($("#user_id").text().length > 0) {
+          if ($("td[id$='_" + day_selector + "']:not(.yui3-calendar-column-hidden)").hasClass("available")) {
+            var input = $("<input>", { type: "hidden", name: "date", value: date });
+            $("#reply_form").find("#request_text").append($(input));
+            $("#reply_form").show()
+            $("#valid_date_alert").hide()
+            $("#login_alert").hide()
+          } else {
+            $("#reply_form").hide()
+            $("#valid_date_alert").show()
+          };
         } else {
-          $("#reply_form").hide()
-        };
+          $("#login_alert").show()
+        }
       });
     });
   });
@@ -89,6 +93,9 @@
         <img src=<%= image.url %>>
       <% end %>
     </div>
+    <br><br>
+    <div id="valid_date_alert" class="alert alert-info" role="alert">Click on a green date to make a request!</div>
+    <div id="login_alert" class="alert alert-info" role="alert">You have to be logged in to make a request!</div>
     <h3>Upcoming Availability</h3>
     <div class="row">
       <div class="col-md-3">
@@ -114,9 +121,6 @@
              <div id="mycalendar"></div>
           </div>
           <div id="rightcolumn" class="yui3-u">
-            <div id="links" style="padding-left:20px;">
-              Selected date: <span id="selecteddate"></span>
-            </div>
           </div>
         </div>
       </div>
@@ -145,4 +149,6 @@
   </div>
 
 </div>
+
+<p id="user_id"><%= session[:user_id] %></p>
 

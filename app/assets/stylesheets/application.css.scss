@@ -71,6 +71,9 @@
   display: none;
 }
 
+#booked {
+  display: none;
+}
 
 .landing-h1 h1{
   font-size: 7em;
@@ -92,5 +95,16 @@
 }
 .dashboard h1{
   text-align: center;
+
+#valid_date_alert {
+  display: none;
+}
+
+#login_alert {
+  display: none;
+}
+
+#user_id {
+  display: none;
 }
 
