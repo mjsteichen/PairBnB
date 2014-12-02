@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 describe ResidencesController do
   let!(:test_user) {User.create!(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")}
   let!(:residence) {Residence.create!(user: test_user, city: "Chicago", state: "IL", zip_code: "12345", description: "It's hella decent" )}

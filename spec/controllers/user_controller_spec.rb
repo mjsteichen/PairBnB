@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 describe UsersController do
   let!(:user) {User.create!(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")}
 

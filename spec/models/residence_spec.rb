@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 describe Residence do
   let(:emily) { User.create!(name: "emily", email: "emily@emily.com", password: "password")}
   let(:emilys_house) { Residence.new(user_id: emily.id, city: "Chicago", state: "IL", zip_code: "60602", neighborhood: "Loop", description: "Great place! Come on by!")}
