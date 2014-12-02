@@ -4,8 +4,10 @@ class RequestsController < ApplicationController
     if signed_in?
       @residence = Residence.find(params[:residence_id])
       @availability = @residence.availabilities.find_by(date: params[:date])
-      @request = Request.new(text: params[:request][:text], residence_id: @residence.id, date: params[:date], sender_id: current_user_id)
-      @request.save
+      if @availability
+        @request = Request.new(text: params[:request][:text], residence_id: @residence.id, date: params[:date], sender_id: current_user_id)
+        @request.save
+      end
       redirect_to residence_path(@residence)
     end
   end
