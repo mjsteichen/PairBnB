@@ -149,177 +149,179 @@
     });
   });
 </script>
+<div class='dashboard'>
+  <div class="row">
+    <div class="col-s-7 col-md-4"></div>
+      <div class="col-s-9 col-md-4">
+        <h1>Dashboard</h1>
+          <ul class="nav nav-pills">
+            <li role ="presentation" id="mess"><a href="/">Messages</a></li>
+            <li role ="presentation" id="res"><a href="/">Your Place</a></li>
+            <li role ="presentation" class="active" id="avail"><a href="/">Availabilities</a></li>
+            <li role ="presentation" id="info"><a href="/">User Info</a></li>
+            <li role ="presentation" id="req"><a href="/">Requests</a></li>
+          </ul>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-md-4"></div>
-    <div class="col-md-4">
-    <nav>
-      <a id="mess" href="/">Messages</a>
-      <a id="res" href="/">Your Place</a>
-      <a id="avail" href="/">Availabilities</a>
-      <a id="info" href="/">User Info</a>
-      <a id="req" href="/">Requests</a>
-    </nav>
+
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+    <div id="user_requests" class="displays">
+      <h1>Requests</h1>
+      <ul>
+      <% @requests.each do |request| %>
+        <li>Request from: <%= User.find(request.sender_id).name %></li>
+        <li>They want to stay in: <%= Residence.find(request.residence_id).city %></li>
+        <li>On: <%= request.date %></li>
+        <li>Message: <%= request.text %></li>
+        <br>
+        <%= form_for :pairing, :html => {:class => "accept_pair"}, url: pairings_path, method: :post do |f| %>
+          <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
+          <%= hidden_field_tag 'date', "#{request.date}" %>
+          <%= hidden_field_tag 'recipient', "#{@user.id}" %>
+          <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
+          <%= hidden_field_tag 'request', "#{request.id}" %>
+          <%= f.submit "Let's do it!" %>
+        <% end %>
+        <%= form_for :request, url: residence_request_path(Residence.find(request.residence_id), request.id), method: :delete  do |f| %>
+          <%= hidden_field_tag 'date', "#{request.date}" %>
+          <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
+          <%= f.submit "No thanks" %>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+
+    <div id="user_messages" class="displays">
+      <h1>Messages</h1>
+      <ul class="received_messages">
+      <% @messages.each do |message| %>
+        <li>From: <%= message.sender.name %><br>
+        <%= message.text %>
+        <br>
+        <%=link_to "Send 'em a message", new_user_message_path(current_user) %>
+          <div id = "<%= message.id%>" >
+            <%= form_for :message, url: messages_reply_path do |f| %>
+              <%= f.text_field :text, placeholder: "Hey bro!" %><br>
+              <%= hidden_field_tag 'recipient', "#{message.sender.id}" %>
+              <%= f.submit 'Send message' %>
+            <% end %>
+          </div>
+        </li>
+        <br><br>
+      <% end %>
+    </ul>
+    </div>
+
+    <div id="user_residences" class="displays">
+    <h1>Your Place</h1>
+      <% if @residences.length == 0%>
+        <%= link_to 'Add your place' %><br>
+        <div id = "add_place" >
+        <%= form_for @residence, url: residences_path, method: :post do |f| %>
+          <% if @residence.errors %>
+            <ul>
+              <% @residence.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          <% end %>
+          <%= f.text_field :city, placeholder: "City" %><br>
+          <%= f.text_field :state, placeholder: "State" %><br>
+          <%= f.text_field :zip_code, placeholder: "Zipcode" %><br>
+          <%= f.text_field :description, placeholder: "House Description & Rules" %><br>
+          <%= f.submit 'List your place' %>
+        <% end %>
+      <% end %>
+      <div class="row">
+      <div class="col-md-6">
+      <% @residences.each do |residence| %>
+        <% residence.images.each do |image| %>
+          <img src=<%= image.url %>><br>
+          <%= link_to "remove this picture", residence_image_path(residence, image), method: :delete %><br>
+          <br>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <strong>City:</strong> <%= residence.city %><br>
+        <strong>State:</strong> <%= residence.state %><br>
+        <strong>Zipcode:</strong> <%= residence.zip_code %><br>
+        <strong>Description:</strong> <%= residence.description %><br>
+        <%= form_for residence, url: edit_residence_path, method: :get do |f| %>
+          <%=hidden_field_tag 'residence', "#{residence.id}" %>
+          <%= f.submit %>
+        <% end %>
+        <br>
+      </div>
+        <div class="col-md-3">
+          <%= form_for :image, url: residence_images_path(residence.id), method: :post, class: 'form-inline' do |f|%>
+            <%=f.text_field :url, placeholder: "paste picture url here", class: 'form-control'%>
+            <%=f.submit "Upload Picture", class: 'btn btn-danger'%>
+          <%end%>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+
+    <div id="user_information" class="displays">
+      <h1>Profile</h1>
+      <div class="col-md-3">
+        <img src=<%= @user.picture_url %>>
+      </div>
+      <div class="col-md-9">
+        <strong>Name: </strong><%= @user.name %><br>
+        <strong>Email: </strong><%= @user.email %><br>
+        <strong>Bio: </strong><%= @user.bio %><br>
+        <strong>Github username:</strong><%= @user.github_url %><br>
+        <strong>Twitter handle:</strong> <%= @user.twitter_url %><br>
+        <%= form_for @user, url: edit_user_path, method: :get do |f| %>
+            <%= f.submit %>
+        <% end %>
+        <br><br><br>
+      </div>
+      <div class="row">
+        <h1>Past Pairings</h1>
+      </div>
+        <ul>
+          <% @user.visited_pairings.each do |pair| %>
+          <li><%= link_to pair.host.name, new_pairing_shoutout_path(pair.host_id) %></li>
+          <!-- this passes the host_id aka user_id as a pairing_id, please do not panic it's ok. -->
+        <% end %>
+      </ul>
+    </div>
+
+  <div id="user_availabilities" class="displays">
+
+    <div id="available">
+    <% @user.availabilities.each do |availability| %>
+      <% if availability.booked == false %>
+        <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %></p>
+      <% end %>
+    <% end %>
+    </div>
+    <div id="booked">
+    <% @user.availabilities.each do |availability| %>
+      <% if availability.booked == true %>
+        <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %></p>
+      <% end %>
+    <% end %>
+    </div>
+
+      <br>
+      <div class="col-md-4"></div>
+      <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+
+        <div id="leftcolumn" class="yui3-u">
+           <div id="mycalendar"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-  <div id="user_requests" class="displays">
-    <h1>Requests</h1>
-    <ul>
-    <% @requests.each do |request| %>
-      <li>Request from: <%= User.find(request.sender_id).name %></li>
-      <li>They want to stay in: <%= Residence.find(request.residence_id).city %></li>
-      <li>On: <%= request.date %></li>
-      <li>Message: <%= request.text %></li>
-      <br>
-      <%= form_for :pairing, :html => {:class => "accept_pair"}, url: pairings_path, method: :post do |f| %>
-        <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
-        <%= hidden_field_tag 'date', "#{request.date}" %>
-        <%= hidden_field_tag 'recipient', "#{@user.id}" %>
-        <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
-        <%= hidden_field_tag 'request', "#{request.id}" %>
-        <%= f.submit "Let's do it!" %>
-      <% end %>
-      <%= form_for :request, url: residence_request_path(Residence.find(request.residence_id), request.id), method: :delete  do |f| %>
-        <%= hidden_field_tag 'date', "#{request.date}" %>
-        <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
-        <%= f.submit "No thanks" %>
-      <% end %>
-    <% end %>
-    </ul>
-  </div>
-
-  <div id="user_messages" class="displays">
-    <h1>Messages</h1>
-    <ul class="received_messages">
-    <% @messages.each do |message| %>
-      <li>From: <%= message.sender.name %><br>
-      <%= message.text %>
-      <br>
-      <%=link_to "Send 'em a message", new_user_message_path(current_user) %>
-        <div id = "<%= message.id%>" >
-          <%= form_for :message, url: messages_reply_path do |f| %>
-            <%= f.text_field :text, placeholder: "Hey bro!" %><br>
-            <%= hidden_field_tag 'recipient', "#{message.sender.id}" %>
-            <%= f.submit 'Send message' %>
-          <% end %>
-        </div>
-      </li>
-      <br><br>
-    <% end %>
-  </ul>
-  </div>
-
-  <div id="user_residences" class="displays">
-  <h1>Your Place</h1>
-    <% if @residences.length == 0%>
-      <%= link_to 'Add your place' %><br>
-      <div id = "add_place" >
-      <%= form_for @residence, url: residences_path, method: :post do |f| %>
-        <% if @residence.errors %>
-          <ul>
-            <% @residence.errors.full_messages.each do |error| %>
-              <li><%= error %></li>
-            <% end %>
-          </ul>
-        <% end %>
-        <%= f.text_field :city, placeholder: "City" %><br>
-        <%= f.text_field :state, placeholder: "State" %><br>
-        <%= f.text_field :zip_code, placeholder: "Zipcode" %><br>
-        <%= f.text_field :description, placeholder: "House Description & Rules" %><br>
-        <%= f.submit 'List your place' %>
-      <% end %>
-    <% end %>
-    <div class="row">
-    <div class="col-md-6">
-    <% @residences.each do |residence| %>
-      <% residence.images.each do |image| %>
-        <img src=<%= image.url %>><br>
-        <%= link_to "remove this picture", residence_image_path(residence, image), method: :delete %><br>
-        <br>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <strong>City:</strong> <%= residence.city %><br>
-      <strong>State:</strong> <%= residence.state %><br>
-      <strong>Zipcode:</strong> <%= residence.zip_code %><br>
-      <strong>Description:</strong> <%= residence.description %><br>
-      <%= form_for residence, url: edit_residence_path, method: :get do |f| %>
-        <%=hidden_field_tag 'residence', "#{residence.id}" %>
-        <%= f.submit %>
-      <% end %>
-      <br>
-    </div>
-      <div class="col-md-3">
-        <%= form_for :image, url: residence_images_path(residence.id), method: :post, class: 'form-inline' do |f|%>
-          <%=f.text_field :url, placeholder: "paste picture url here", class: 'form-control'%>
-          <%=f.submit "Upload Picture", class: 'btn btn-danger'%>
-        <%end%>
-    </div>
-    <% end %>
-  </div>
-
-
-  <div id="user_information" class="displays">
-    <h1>Profile</h1>
-    <div class="col-md-3">
-      <img src=<%= @user.picture_url %>>
-    </div>
-    <div class="col-md-9">
-      <strong>Name: </strong><%= @user.name %><br>
-      <strong>Email: </strong><%= @user.email %><br>
-      <strong>Bio: </strong><%= @user.bio %><br>
-      <strong>Github username:</strong><%= @user.github_url %><br>
-      <strong>Twitter handle:</strong> <%= @user.twitter_url %><br>
-      <%= form_for @user, url: edit_user_path, method: :get do |f| %>
-          <%= f.submit %>
-      <% end %>
-      <br><br><br>
-    </div>
-    <div class="row">
-      <h1>Past Pairings</h1>
-    </div>
-      <ul>
-        <% @user.visited_pairings.each do |pair| %>
-        <li><%= link_to pair.host.name, new_pairing_shoutout_path(pair.host_id) %></li>
-        <!-- this passes the host_id aka user_id as a pairing_id, please do not panic it's ok. -->
-      <% end %>
-    </ul>
-  </div>
-
-<div id="user_availabilities" class="displays">
-  <h1>Availabilities</h1>
-  <div id="available">
-  <% @user.availabilities.each do |availability| %>
-    <% if availability.booked == false %>
-      <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %></p>
-    <% end %>
-  <% end %>
-  </div>
-  <div id="booked">
-  <% @user.availabilities.each do |availability| %>
-    <% if availability.booked == true %>
-      <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %></p>
-    <% end %>
-  <% end %>
-  </div>
-    <br>
-    <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
-
-      <div id="leftcolumn" class="yui3-u">
-         <div id="mycalendar"></div>
-      </div>
-      <div id="rightcolumn" class="yui3-u">
-       <div id="links" style="padding-left:20px;">
-          Selected date: <span id="selecteddate"></span>
-       </div>
-      </div>
-    </div>
-  </div>
+</div>
 </div>
 
