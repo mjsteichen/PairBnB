@@ -1,6 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+#login-landing{
+  display: none;
+}
+
 #add_place {
   display: none;
 }
@@ -40,6 +44,7 @@
   height:600px;
 
 }
+
 .jumbotron{
   background: transparent;
   position: fixed;
@@ -64,4 +69,6 @@
   width:400px;
 }
 
+.available {
 
+}

@@ -27,7 +27,7 @@
   <div class="row">
     <div class="col-xs-2 col-md-4"></div>
     <div class="col-xs-8 col-md-4">
-  <%= link_to 'Login', :id => 'loginbar' %>
+  <%= link_to 'Login', "#", id: "loginbar" %>
   <%= link_to 'Sign Up', new_user_path %>
 <div id="login-landing">
     <%= form_for :session, url: sessions_path do |f| %>

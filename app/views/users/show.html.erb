@@ -16,7 +16,6 @@
       reply_form.toggle();
     });
 
-    var available = "add";
     var residence = 0;
 
     $(".displays").hide();
@@ -59,8 +58,9 @@
 
     $(".residence").click(function(event) {
       event.preventDefault();
-      residence = $(this).attr("id") - 1
-    })
+      residence = $(this).attr("id") - 1;
+      $("td").css("background-color", "white")
+    });
 
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
@@ -78,6 +78,16 @@
 
       // Get a reference to Y.DataType.Date
       var dtdate = Y.DataType.Date;
+
+      var divLength = $("#available p").length
+      for (var i = 0; i < divLength; i++) {
+        var availableDay = $("#available p")[i].id
+        if (availableDay[0] === "0") {
+          availableDay = availableDay[1];
+        }
+        availableDay = "_" + availableDay;
+        $("td[id$='" + availableDay + "']:not(.yui3-calendar-column-hidden)").addClass("available").css("background-color", "#14A714")
+      }
 
       // Listen to calendar's selectionChange event.
       calendar.on("selectionChange", function (ev) {
@@ -105,8 +115,14 @@
         } else {
           var user_id = $("a:contains('Logout')").attr("href").slice(-2)
         }
-        if (available == "add") {
-          $("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").css("background-color", "#14A714");
+        if ($("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").hasClass("available")) {
+          $("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").removeClass("available").css("background-color", "white");
+          var request = $.ajax({
+            url: "/users/" + user_id + "/availabilities/" + $(day_id).text(),
+            type: "DELETE"
+          });
+        } else {
+          $("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").addClass("available").css("background-color", "#14A714");
           var request = $.ajax({
             url: "/users/" + user_id + "/availabilities",
             type: "POST",
@@ -114,15 +130,9 @@
           });
           request.done(function(response) {
             if (response["id"]) {
-              $("#available").append("<p id= " + response['day'] + " class='id_for_me'>" + response['id'] + "<p>");
+              $("#available").append("<p id= " + response['day'] + " class='id_for_me'>" + response['id'] + "</p>");
             }
           })
-        } else {
-          $("td[id$='" + day_selector + "']:not(.yui3-calendar-column-hidden)").css("background-color", "white");
-          var request = $.ajax({
-            url: "/users/" + user_id + "/availabilities/" + $(day_id).text(),
-            type: "DELETE"
-          });
         }
         Y.one("#selecteddate").setHTML(dtdate.format(newDate));
       });
@@ -159,7 +169,7 @@
       <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
       <%= f.submit "Let's do it!" %>
     <% end %>
-    <%= form_for :request, url: user_request_path(User.find(request.sender_id), request.id), method: :delete  do |f| %>
+    <%= form_for :request, url: residence_request_path(Residence.find(request.residence_id), request.id), method: :delete  do |f| %>
       <%= hidden_field_tag 'date', "#{request.date}" %>
       <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
       <%= f.submit "No thanks" %>
@@ -256,16 +266,14 @@
   <h1>Availabilities</h1>
   <div id="available">
   <% @user.availabilities.each do |availability| %>
-    <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %><p>
+    <p id="<%= availability.date.last(2) %>" class="id_for_me"><%= availability.id %></p>
   <% end %>
   </div>
   <br>
-  <button id="add" type="button">Add Availabilities</button>
-  <button id="remove" type="button">Remove Availabilities</button>
   <% i = 0 %>
   <% @residences.each do |residence| %>
     <% i += 1 %>
-    <button class="residence" id="<%= i %>" type="button">Manage Residence <%= i %></button>
+    <button class="residence" id="res_<%= i %>" type="button">Manage Residence <%= i %></button>
   <% end %>
   <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
 

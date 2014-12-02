@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :residences do
     resources :images, only:[:new, :create, :destroy]
-    resources :requests, only: [:create]
+    resources :requests, only: [:create, :destroy]
   end
 
   resources :pairings, only: [:create] do

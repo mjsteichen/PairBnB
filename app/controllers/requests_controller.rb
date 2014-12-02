@@ -1,10 +1,11 @@
 class RequestsController < ApplicationController
 
   def create
+    binding.pry
     if signed_in?
-      @residence = Residence.find(params[:residence])
+      @residence = Residence.find(params[:residence_id])
       @availability = @residence.availabilities.find_by(date: params[:date])
-      @request = Request.new(text: params[:request][:text], residence_id: params[:residence], date: params[:date], sender_id: current_user_id)
+      @request = Request.new(text: params[:request][:text], residence_id: @residence.id, date: params[:date], sender_id: current_user_id)
       @request.save
       redirect_to residence_path(@residence)
     end

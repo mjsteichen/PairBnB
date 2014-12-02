@@ -21,7 +21,7 @@
         var newDate = ev.newSelection[0];
         var date = dtdate.format(newDate);
         var input = $("<input>", { type: "hidden", name: "date", value: date });
-        $("#reply_form").find("#residence").append($(input));
+        $("#reply_form").find("#request_text").append($(input));
         $("#reply_form").show()
       });
     });
@@ -98,7 +98,7 @@
     <div id = "reply_form" >
       <div class="form-group">
         <p><strong>Tell them why you want to stay with them! Don't be a stranger!</strong></p>
-        <%= form_for :message, url: residence_requests_path(@residence) do |f| %>
+        <%= form_for :request, url: residence_requests_path(@residence) do |f| %>
           <%= f.text_area :text, placeholder: "Hey bro!", class: "form-control" %><br>
           <%= f.submit 'Request to pair!', class: 'btn btn-danger' %>
         <% end %>
@@ -106,11 +106,10 @@
     </div>
   </div>
 </div>
-      <h3>Shoutouts</h3>
-        <% @user.received_shoutouts.each do |shoutout| %>
-          <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
-        <% end %>
-
+  <h3>Shoutouts</h3>
+  <% @user.received_shoutouts.each do |shoutout| %>
+    <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
+  <% end %>
   </div>
 
 </div>
