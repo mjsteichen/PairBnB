@@ -38,6 +38,8 @@
           var input = $("<input>", { type: "hidden", name: "date", value: date });
           $("#reply_form").find("#request_text").append($(input));
           $("#reply_form").show()
+        } else {
+          $("#reply_form").hide()
         };
       });
     });
