@@ -5,7 +5,7 @@
     </div>
     <%= form_tag residences_search_path, :method => 'get', class: "navbar-form navbar-left", role:"search" do %>
       <div class="form-group">
-        <%= text_field_tag :search, params[:search], placeholder: "I'm going to...", class: 'form-control' %>
+        <%= text_field_tag :search, params[:search], placeholder: "I'm headed to...", class: 'form-control' %>
       </div>
       <%= submit_tag "Search", :city => nil, class: 'btn btn-danger' %>
       <% end %>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-1"></div>
+  <div class="col-md-2"></div>
   <div class="col-md-8">
     <h2>Results for <%= params[:search] %></h2>
 
@@ -12,29 +12,32 @@
         <%= text_field_tag :search, params[:search], value: nil, placeholder: "I'm going to...", class: 'form-control' %>
       </div>
     </div>
+  </div>
       <%= submit_tag "Search", :city => nil, class: 'btn btn-danger' %>
     <% end %>
   <% end %>
 
-  <div id="result-page">
-  <ul>
-  <% @residences.each do |residence| %>
+      <div id="result-page">
+      <ul>
+      <% @residences.each do |residence| %>
+        <li>
+          <div class="row">
+            <div class="col-xs-2 col-s-2 col-md-2">
+              <img src=<%= residence.user.picture_url %>>
+            </div>
+            <div class="col-xs-2 col-md-3">
+              <h5>Name: <%=link_to residence.user.name, residence_path(residence) %></h5>
+              <h5>Neighborhood:</h5> <%= residence.neighborhood%>
+              <h5>Areas of Interest:</h5> <%= residence.user.specialties %>
+            </div>
+            <div class="col-md-5">
+              <h5>Bio:</h5> <%= residence.user.bio[0,200] + "..." %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+    </div>
 
-    <li>
-      <div class="col-xs-2 col-s-2 col-md-2">
-        <img src=<%= residence.user.picture_url %>>
-      </div>
-      <div class="col-xs-2 col-md-3">
-        <h5>Name: <%=link_to residence.user.name, residence_path(residence) %></h5>
-        <h5>Neighborhood:</h5> <%= residence.neighborhood%>
-        <h5>Areas of Interest:</h5> <%= residence.user.specialties %>
-      </div>
-      <div class="col-md-5">
-        <h5>Bio:</h5> <%= residence.user.bio[0,200] + "..." %>
-      </div>
-    </li>
-  <% end %>
-  </ul>
 </div>
-  </div>
 </div>
