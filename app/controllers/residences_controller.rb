@@ -12,6 +12,11 @@ class ResidencesController < ApplicationController
   end
 
   def show
+    if session[:user_id]
+      @session_user_id = current_user.id
+    else
+      @session_user_id = 0
+    end
     @message = Message.new
     @residence = Residence.where(id:params[:id]).includes(:user => {:received_shoutouts => :sender}).first
     @user = @residence.user

@@ -3,6 +3,8 @@
 
 <script type="text/javascript">
   var currentUserId = <%= @user.id %>;
+  var sessionUserId = <%= @session_user_id %>;
+  console.log(sessionUserId);
 
   $(document).ready(function() {
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
@@ -40,13 +42,51 @@
 
       loadMonth(current_month, current_year);
 
-      calendar.on("selectionChange", function (ev) {
-        var newDate = ev.newSelection[0];
+      function next_month() {
+        if (current_month === 12) {
+          current_month = 1;
+          current_year++;
+        } else {
+          current_month ++;
+        }
+      };
+
+      function prev_month() {
+        if (current_month === 1) {
+          current_month = 12;
+          current_year--;
+        } else {
+          current_month --;
+        }
+      };
+
+      function clear_tds() {
+        $("td").css("background-color", "white");
+        $("td").removeClass("available booked");
+        $("td").removeData("availability-id pairing-id");
+      };
+
+      $(".yui3-calendarnav-nextmonth").click(function(event) {
+        clear_tds();
+        next_month();
+        loadMonth(current_month, current_year);
+      });
+
+      $(".yui3-calendarnav-prevmonth").click(function(event) {
+        clear_tds();
+        prev_month();
+        loadMonth(current_month, current_year);
+      });
+
+      calendar.on("dateClick", function (ev) {
+        var dayElement = $(ev.cell._node);
+
+        var newDate = ev.date;
         var date = dtdate.format(newDate);
-        var day = date.slice(-2);
-        var day_selector = +day;
-        if ($("#user_id").text().length > 0) {
-          if ($("td[id$='_" + day_selector + "']:not(.yui3-calendar-column-hidden)").hasClass("available")) {
+        var node = $(dayElement[0]);
+
+        if (sessionUserId > 0) {
+          if (node.hasClass("available")) {
             var input = $("<input>", { type: "hidden", name: "date", value: date });
             $("#reply_form").find("#request_text").append($(input));
             $("#reply_form").show();
@@ -55,10 +95,10 @@
           } else {
             $("#reply_form").hide();
             $("#valid_date_alert").show();
-          };
+          }
         } else {
           $("#login_alert").show();
-        }
+        };
       });
     });
   });
