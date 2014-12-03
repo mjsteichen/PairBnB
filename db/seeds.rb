@@ -23,7 +23,7 @@ User.create!(name: "Dave Hoover", email: "dave@hoover.com", password: "catscats"
 
   Availability.create!(residence_id: rand(24) + 1, pairing_id: rand(24) + 1, date: Faker::Date.forward(30))
 
-  Shoutout.create!(recipient_id: rand(12) + 1, sender_id: (rand(12) + 13), text: Faker::Lorem.sentences(4).join(" "))
+  Shoutout.create!(recipient_id: rand(12) + 1, sender_id: (rand(12) + 13), text: "They are so great to pair with! The sofa is super comfy, and they have a hot tub!")
 
   Message.create!(sender_id: rand(12) + 1, recipient_id: (rand(12) + 13), text: Faker::Lorem.sentences(4).join(" "))
 
