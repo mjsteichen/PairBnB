@@ -1,3 +1,5 @@
- <%= form_for :residence, url: edit_residence_path(@user_residence), method: :get do |f| %>
-          <%= f.submit "Edit My Place", class: "btn btn-default" %>
+<div id="edit_residence">
+  <%= form_for :residence, url: edit_residence_path(@user_residence), method: :get do |f| %>
+    <%= f.submit "Edit My Place", class: "btn btn-default" %>
   <% end %>
+</div>

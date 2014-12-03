@@ -46,6 +46,7 @@ class ResidencesController < ApplicationController
     @residence = Residence.find(current_user.residences.first)
     @user = @residence.user
     @residence.update(city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], description: params[:residence][:description])
+    binding.pry
     redirect_to user_path(@user)
   end
 

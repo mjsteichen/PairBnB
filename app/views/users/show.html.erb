@@ -82,6 +82,11 @@
     $("#info_close").click(function(event) {
       event.preventDefault();
       $("#info_div").hide()
+    });
+
+    $($("#edit_residence").find("form")[0]).submit(function(event) {
+      event.preventDefault();
+      $("#residence_edit_form").show();
     })
 
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
@@ -301,6 +306,8 @@
         <strong>House Rules/Description:</strong> <%= @user_residence.description %><br>
         <%= render partial: "shared/edit_residence" %><br>
         <%= render partial: "shared/image" %>
+        <br><br>
+        <%= render partial: "shared/residence" %>
       <% end %>
     </div> <!-- ends the info colum -->
   </div>
