@@ -29,8 +29,9 @@ class ResidencesController < ApplicationController
   def create
     @residence = Residence.new(residence_params)
     @residence.user_id = current_user.id
+    @user = @residence.user
     if @residence.save
-      redirect_to residence_path(@residence)
+      redirect_to user_path(@user)
     else
       render 'new'
     end
@@ -44,8 +45,8 @@ class ResidencesController < ApplicationController
   def update
     @residence = Residence.find(current_user.residences.first)
     @user = @residence.user
-    @residence.update(city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], description: params[:residence][:description])
-    binding.pry
+    @residence.attributes = { city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], description: params[:residence][:description]}
+    @residence.save(:validate => false)
     redirect_to user_path(@user)
   end
 
