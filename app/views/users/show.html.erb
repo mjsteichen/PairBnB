@@ -243,6 +243,7 @@
           <%= render partial: "shared/residence" %>
         </div>
       <% else %>
+      <div class="col-md-1"></div>
         <div class="col-md-4">
         <% @user_residence = @residences.first %>
         <% @user_residence.images.each do |image| %>
@@ -252,10 +253,10 @@
       </div>
 
         <%= render partial: "shared/image" %>
-        <%= @user_residence.city %>
-        <%= @user_residence.state%>
-        <%= @user_residence.zip_code %>
-        <%= @user_residence.description %>
+        <strong>City: </strong><%= @user_residence.city %><br>
+        <strong>State:</strong> <%= @user_residence.state%><br>
+        <strong>Zipcode:</strong> <%= @user_residence.zip_code %><br>
+        <strong>House Rules/Description:</strong> <%= @user_residence.description %><br>
         <%= render partial: "shared/edit_residence" %>
       <% end %>
     </div>

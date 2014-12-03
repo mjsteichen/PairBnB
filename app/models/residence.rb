@@ -7,9 +7,8 @@ class Residence < ActiveRecord::Base
 
   belongs_to :user
 
-
   def self.search(search)
-    user_search = search.capitalize!
+    user_search = search
     if user_search.present?
       where('city LIKE ?', "%#{user_search}%")
     else
