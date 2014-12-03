@@ -13,8 +13,8 @@ class ResidencesController < ApplicationController
 
   def show
     @message = Message.new
-    @residence = Residence.find(params[:id])
-    @user = User.find(@residence.user.id)
+    @residence = Residence.where(id:params[:id]).includes(:user => {:received_shoutouts => :sender}).first
+    @user = @residence.user
   end
 
   def new
