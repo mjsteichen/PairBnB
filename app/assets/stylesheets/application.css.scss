@@ -7,9 +7,14 @@
   display: none;
 }
 
-.received_messages div{
+.received_messages span{
   display: none;
 }
+
+.message_sender_wrapper {
+  background-color: #dbd9d9;
+}
+
 
 #user_information img{
   height: 200px;
@@ -68,6 +73,7 @@
 
 }
 
+
 #available {
   display: none;
 }
@@ -91,7 +97,7 @@
 .dashboard{
   border: 1px solid grey;
   background:#F5F5F5;
-  height: 600px;
+  padding-bottom: 25px;
 }
 .dashboard ul{
   width: 496px;

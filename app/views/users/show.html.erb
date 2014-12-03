@@ -21,7 +21,7 @@
     var residence = 0;
 
     $(".displays").hide();
-    $("#user_availabilities").show();
+    $("#user_information").show();
 
     $("#req").click(function(event) {
       event.preventDefault();
@@ -210,8 +210,8 @@
           <ul class="nav nav-pills">
             <li role ="presentation" id="mess"><a href="/">Messages</a></li>
             <li role ="presentation" id="res"><a href="/">My Place</a></li>
-            <li role ="presentation" class="active" id="avail"><a href="/">My Availabilities</a></li>
-            <li role ="presentation" id="info"><a href="/">User Info</a></li>
+            <li role ="presentation" id="avail"><a href="/">My Availabilities</a></li>
+            <li role ="presentation" class="active" id="info"><a href="/">User Info</a></li>
             <li role ="presentation" id="req"><a href="/">Requests</a></li>
           </ul>
     </div>
@@ -258,31 +258,45 @@
         <br>
         <h4>Sorry, doesn't look like you've gotten any messages yet!</h4>
       <% end %>
+    <div class= "row">
+    <div class = "col-md-2"></div>
+    <div class = "col-md-4">
       <ul class="received_messages">
       <% @received_messages.each do |message| %>
-        <li>From: <%= message.sender.name %>
-        <%= message.text %>
+        <div class = "message_sender_wrapper">
+          <li>From: <%= message.sender.name %><br>
+        </div>
+        <em><%= message.text %></em>
         <br>
         <%=link_to "Send 'em a message", new_user_message_path(current_user) %>
-          <div id = "<%= message.id%>" >
+          <span id = "<%= message.id%>" >
             <%= form_for :message, url: messages_reply_path do |f| %>
               <%= f.text_field :text, placeholder: "Hey bro!" %><br>
               <%= hidden_field_tag 'recipient', "#{message.sender.id}" %>
-              <%= f.submit 'Send message' %>
+              <%= f.submit 'Send message', class: "btn btn-danger" %>
             <% end %>
-          </div>
+          </span>
         </li>
         <br><br>
       <% end %>
     </ul>
-    <ul>
+    </div>
+  </div>
       <h4> Sent Messages</h4>
+    <div class= "row">
+    <div class = "col-md-2"></div>
+    <div class = "col-md-4">
+    <ul>
       <%@sent_messages.each do |sent_mess|%>
-        <li> Sent to: <%=sent_mess.recipient.name%>
-        <%=sent_mess.text%></li><br>
+      <div class = "message_sender_wrapper">
+        <li> Sent to: <%=sent_mess.recipient.name%><br>
+      </div>
+        <em><%=sent_mess.text%></em></li><br>
       <%end%>
     </ul>
+  </div>
     </div>
+  </div>
 
     <div id="user_residences" class="displays">
       <% if @residences.length == 0%>
