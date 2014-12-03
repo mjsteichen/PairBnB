@@ -5,7 +5,6 @@
     <%= form_for @user, method: :put do |f| %>
       <%= f.text_field :name, placeholder: @user.name, class: 'form-control' %>
       <%= f.text_field :email, placeholder: @user.email, class: 'form-control' %>
-      <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
       <%= f.text_field :picture_url, placeholder: 'Picture URL', class: 'form-control' %>
       <%= f.text_field :github_url, placeholder: "Github url", class: 'form-control' %>
       <%= f.text_field :twitter_url, placeholder: "Twitter url", class: 'form-control' %>
