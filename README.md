@@ -3,6 +3,16 @@ PairBnB
 
 AirBnB but for Programmers in #realtime #agile #dynamicenvironments
 
+To Use
+=======
+```
+ git clone https://github.com/mjsteichen/PairBnB.git
+ cd PairBnB
+ bundle install
+ rake db:create && rake db:migrate && rake db:seed
+ rails server
+```
+
 Project Description
 =======
 
