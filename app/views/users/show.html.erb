@@ -145,20 +145,22 @@
         }
       };
 
-      $(".yui3-calendarnav-nextmonth").click(function(event) {
+      function clear_tds() {
         $("td").css("background-color", "white");
+        $("td").removeClass("available booked");
+        $("td").removeData("availability-id pairing-id");
+      };
+
+      $(".yui3-calendarnav-nextmonth").click(function(event) {
+        clear_tds();
         next_month();
         loadMonth(current_month, current_year);
-        console.log("The Year is: ", current_year);
-        console.log("The Month is: ", current_month);
       });
 
       $(".yui3-calendarnav-prevmonth").click(function(event) {
-        $("td").css("background-color", "white")
+        clear_tds();
         prev_month();
         loadMonth(current_month, current_year);
-        console.log("The Year is: ", current_year);
-        console.log("The Month is: ", current_month);
       });
 
 
@@ -196,7 +198,6 @@
             data: { date: date}
           });
           request.done(function(response) {
-            console.log(response["id"]);
             node.data('availability-id', response["id"]);
           })
         };
