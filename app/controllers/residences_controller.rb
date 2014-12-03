@@ -27,7 +27,6 @@ class ResidencesController < ApplicationController
   end
 
   def create
-    binding.pry
     @residence = Residence.new(residence_params)
     @residence.user_id = current_user.id
     if @residence.save
