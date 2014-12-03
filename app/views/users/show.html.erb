@@ -165,11 +165,14 @@
     });
   });
 </script>
+<div class="col-md-2"></div>
+<div class="col-md-8" class='dash-container'>
 <div class='dashboard'>
   <div class="row">
-    <div class="col-s-7 col-md-4"></div>
-      <div class="col-s-9 col-md-4">
-        <h1>Dashboard</h1>
+    <h1>Dashboard</h1>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" id="nav-space">
           <ul class="nav nav-pills">
             <li role ="presentation" id="mess"><a href="/">Messages</a></li>
             <li role ="presentation" id="res"><a href="/">My Place</a></li>
@@ -178,7 +181,10 @@
             <li role ="presentation" id="req"><a href="/">Requests</a></li>
           </ul>
     </div>
-  </div>
+    <div class="col-md-4"></div> <!-- closes the nav colum -->
+  </div> <!-- closes the nav row -->
+
+
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8"> <!-- my child lives on line 288 -->
@@ -213,13 +219,14 @@
     </div>
 
     <div id="user_messages" class="displays">
-      <% if @messages.length == 0 %>
+      <h4> Received Messages</h4>
+      <% if @received_messages.length == 0 %>
         <br>
-        <h4>Sorry, doesn't look like you have any messages yet!</h4>
+        <h4>Sorry, doesn't look like you've gotten any messages yet!</h4>
       <% end %>
       <ul class="received_messages">
-      <% @messages.each do |message| %>
-        <li>From: <%= message.sender.name %><br>
+      <% @received_messages.each do |message| %>
+        <li>From: <%= message.sender.name %>
         <%= message.text %>
         <br>
         <%=link_to "Send 'em a message", new_user_message_path(current_user) %>
@@ -234,6 +241,13 @@
         <br><br>
       <% end %>
     </ul>
+    <ul>
+      <h4> Sent Messages</h4>
+      <%@sent_messages.each do |sent_mess|%>
+        <li> Sent to: <%=sent_mess.recipient.name%>
+        <%=sent_mess.text%></li><br>
+      <%end%>
+    </ul>
     </div>
 
     <div id="user_residences" class="displays">
@@ -243,37 +257,40 @@
           <%= render partial: "shared/residence" %>
         </div>
       <% else %>
-        <div class="col-md-4">
+
+        <div class="col-md-6">
         <% @user_residence = @residences.first %>
         <% @user_residence.images.each do |image| %>
           <span class="residence-img"><img src=<%= image.url %>><span><br>
           <%= link_to 'remove this picture', residence_image_path(@user_residence, image), method: :delete %><br>
         <% end %>
-      </div>
-
+      </div> <!-- closes residence image colum -->
+      <div class="col-md-6">
+        <strong>City: </strong><%= @user_residence.city %><br>
+        <strong>State:</strong> <%= @user_residence.state%><br>
+        <strong>Zipcode:</strong> <%= @user_residence.zip_code %><br>
+        <strong>House Rules/Description:</strong> <%= @user_residence.description %><br>
+        <%= render partial: "shared/edit_residence" %><br>
         <%= render partial: "shared/image" %>
-        <%= @user_residence.city %>
-        <%= @user_residence.state%>
-        <%= @user_residence.zip_code %>
-        <%= @user_residence.description %>
-        <%= render partial: "shared/edit_residence" %>
       <% end %>
-    </div>
+    </div> <!-- ends the info colum -->
   </div>
 
 
+
     <div id="user_information" class="displays">
+      <div class="col-md-1"></div>
       <div class="col-md-3">
         <img src=<%= @user.picture_url %>>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-8">
         <strong>Name: </strong><%= @user.name %><br>
         <strong>Email: </strong><%= @user.email %><br>
         <strong>Bio: </strong><%= @user.bio %><br>
         <strong>Github username:</strong><%= @user.github_url %><br>
         <strong>Twitter handle:</strong> <%= @user.twitter_url %><br>
         <%= form_for @user, url: edit_user_path, method: :get do |f| %>
-            <%= f.submit %>
+            <%= f.submit 'Edit your info', class: "btn btn-default" %>
         <% end %>
         <br><br><br>
       </div>
@@ -316,13 +333,13 @@
            <div id="mycalendar"></div>
       </div>
       </div>
-      <div id="helper_box">Welcome to PairBnB!</div>
     <div id="color_key">
       <h4><span class="white_text">Unavailable</span> - <span class="green_text">Available</span> - <span class="red_text">Booked</span></h4>
+
     </div>
     </div>
   </div>
 </div>
 </div>
-
+</div>
 

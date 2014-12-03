@@ -15,6 +15,10 @@
   height: 200px;
 }
 
+#upload_image_wrapper {
+  padding-left: 0px;
+}
+
 
 #result-page img{
   height:200px;
@@ -32,7 +36,9 @@
   display: none;
 }
 
-
+#mycalendar {
+  box-shadow: 1px 1px 1px black;
+}
 
 .jumbotron{
   background: transparent;
@@ -83,11 +89,12 @@
   padding-top: 10px;
 }
 .dashboard{
-  background:#bdc3c7;
+  border: 1px solid grey;
+  background:#F5F5F5;
   height: 600px;
 }
 .dashboard ul{
-  width: 600px;
+  width: 496px;
 }
 .dashboard h1{
   text-align: center;
@@ -111,13 +118,18 @@
 
 .red_text {
   color: #C9302C;
+  text-shadow: 1px 1px 1px black;
+
 }
 
 .green_text {
   color: #14A714;
+  text-shadow: 1px 1px 1px black;
+
 }
 
 .white_text {
+  text-shadow: 2px 1px 1px black;
   color: white;
 }
 
@@ -132,4 +144,16 @@
   width: 70%;
   margin: auto;
   text-align: center;
+}
+
+#user_residences{
+  padding-top:10px;
+}
+
+#user_information{
+  padding-top:10px;
+}
+
+#nav-space{
+  padding-left:0px;
 }
