@@ -7,6 +7,7 @@ class RequestsController < ApplicationController
       if @availability
         @request = Request.new(text: params[:request][:text], residence_id: @residence.id, date: params[:date], sender_id: current_user_id)
         @request.save
+        flash[:sent_request_confirmation] = "We passed along your request-- they'll get in touch with you after confirmation. :)"
       end
       redirect_to residence_path(@residence)
     end
