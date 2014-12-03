@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'residences/search' => 'residences#search'
 
+  get '/month_schedules/:user_id/:month/:year' => 'month_schedules#show'
+
   post 'messages/reply' => 'messages#reply'
 
   resources :sessions, only:[:new, :create, :destroy]
