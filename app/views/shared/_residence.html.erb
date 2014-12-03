@@ -1,7 +1,17 @@
 <%= form_for :residence, url: residences_path do |f| %>
-  <%= f.text_field :city, placeholder: "City" %><br>
-  <%= f.text_field :state, placeholder: "State" %><br>
-  <%= f.text_field :zip_code, placeholder: "Zipcode" %><br>
-  <%= f.text_field :description, placeholder: "Description" %><br>
-  <%= f.submit 'List your place' %>
+  <div class="form-group">
+    <div class="field form-group">
+      <%= f.text_field :city, placeholder: "City", class: 'form-control' %>
+    </div>
+    <div class="field form-group">
+      <%= f.text_field :state, placeholder: "State", class: 'form-control' %>
+    </div>
+    <div class="field form-group">
+      <%= f.text_field :zip_code, placeholder: "Zipcode", class: 'form-control' %>
+    </div>
+    <div class="field form-group">
+      <%= f.text_field :description, placeholder: "Description", class: 'form-control' %><br>
+    </div>
+    <%= f.submit 'List your place', class: 'btn btn-danger' %>
+  </div>
 <% end %>
