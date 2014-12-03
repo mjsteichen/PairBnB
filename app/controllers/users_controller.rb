@@ -21,7 +21,8 @@ class UsersController < ApplicationController
     else
       @requests = @user.received_requests.order(:id).reverse_order
       @availabilities = @user.availabilities
-      @messages = @user.received_messages.order(:id).reverse_order
+      @received_messages = @user.received_messages.order(:id).reverse_order
+      @sent_messages = @user.sent_messages.order(:id).reverse_order
       @residences = @user.residences
 
     end
