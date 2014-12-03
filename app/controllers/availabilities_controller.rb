@@ -12,7 +12,6 @@ class AvailabilitiesController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @user = User.find(params[:user_id])
     availability = Availability.find(params[:id])
     if availability
