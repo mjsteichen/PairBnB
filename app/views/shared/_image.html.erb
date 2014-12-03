@@ -1,4 +1,11 @@
-<%= form_for :image, url: residence_images_path(@user_residence) do |f| %>
-  <%= f.text_field :url, placeholder: "paste picture url here" %>
-  <%=f.submit 'Upload Image'%>
+
+<div class = "col-md-5" id = "upload_image_wrapper">
+<%= form_for :image, url: residence_images_path(@user_residence), :class => "form-inline" do |f| %>
+  <div class= "input-group">
+  <%= f.text_field :url, placeholder: "paste picture url here", class: "form-control" %>
+    <div class="input-group-btn">
+      <%=f.submit 'Upload Image', class: "btn btn-default"%>
+    </div>
+  </div>
+</div>
 <% end %>

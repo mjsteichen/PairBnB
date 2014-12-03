@@ -165,6 +165,8 @@
     });
   });
 </script>
+<div class="col-md-2"></div>
+<div class="col-md-8" class='dash-container'>
 <div class='dashboard'>
   <div class="row">
     <div class="col-s-7 col-md-4"></div>
@@ -252,12 +254,12 @@
         <% end %>
       </div>
 
-        <%= render partial: "shared/image" %>
         <strong>City: </strong><%= @user_residence.city %><br>
         <strong>State:</strong> <%= @user_residence.state%><br>
         <strong>Zipcode:</strong> <%= @user_residence.zip_code %><br>
         <strong>House Rules/Description:</strong> <%= @user_residence.description %><br>
-        <%= render partial: "shared/edit_residence" %>
+        <%= render partial: "shared/edit_residence" %><br>
+        <%= render partial: "shared/image" %>
       <% end %>
     </div>
 
@@ -275,7 +277,7 @@
         <strong>Github username:</strong><%= @user.github_url %><br>
         <strong>Twitter handle:</strong> <%= @user.twitter_url %><br>
         <%= form_for @user, url: edit_user_path, method: :get do |f| %>
-            <%= f.submit %>
+            <%= f.submit 'Edit your info', class: "btn btn-default" %>
         <% end %>
         <br><br><br>
       </div>
@@ -318,13 +320,13 @@
            <div id="mycalendar"></div>
       </div>
       </div>
-      <div id="helper_box">Welcome to PairBnB!</div>
     <div id="color_key">
       <h4><span class="white_text">Unavailable</span> - <span class="green_text">Available</span> - <span class="red_text">Booked</span></h4>
+
     </div>
     </div>
   </div>
 </div>
 </div>
-
+</div>
 
