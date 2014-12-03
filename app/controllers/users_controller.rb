@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.update(picture_url: "https://myspace.com/common/images/user.png")
       session[:user_id] = @user.id
       flash[:welcome] = " Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       "
       redirect_to user_path(@user)
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(current_user)
     # if @user.id != logged_in_user_id
     # if is_logged_on_user?(@user)
     # if is_logged_on_user?(params[:id])  - Then take the User.find and move it into the else

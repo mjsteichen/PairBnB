@@ -22,6 +22,7 @@ class ResidencesController < ApplicationController
   end
 
   def create
+    binding.pry
     @residence = Residence.new(residence_params)
     @residence.user_id = current_user.id
     if @residence.save
@@ -31,16 +32,16 @@ class ResidencesController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(current_user)
+    @residence = @user.residences.first
+  end
+
   def update
-    @residence = Residence.find(params[:id])
+    @residence = Residence.find(current_user.residences.first)
     @user = @residence.user
     @residence.update(city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], description: params[:residence][:description])
     redirect_to user_path(@user)
-  end
-
-  def edit
-    @user = User.find(params[:id])
-    @residence = @user.residences.first
   end
 
   def destroy

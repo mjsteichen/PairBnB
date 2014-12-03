@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :email, format: { with: /.+@.+\.{1}.+/ }
   validates :password, length: { minimum: 8 }
+  validates :bio, length: { maximum: 400 }
 
 
   has_many :sent_messages, class_name: "Message", foreign_key: :sender_id
