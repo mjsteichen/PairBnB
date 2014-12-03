@@ -15,9 +15,6 @@
   height: 200px;
 }
 
-#user_residences img{
-  height: 300px;
-}
 
 #result-page img{
   height:200px;
@@ -124,3 +121,9 @@
   color: white;
 }
 
+.residence-img img{
+  overflow: auto;
+  width: 300px;
+  height: auto;
+  max-height: 300px;
+}

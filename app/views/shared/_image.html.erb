@@ -1,0 +1,4 @@
+<%= form_for :image, url: residence_images_path(@user_residence) do |f| %>
+  <%= f.text_field :url, placeholder: "paste picture url here" %>
+  <%=f.submit 'Upload Image'%>
+<% end %>

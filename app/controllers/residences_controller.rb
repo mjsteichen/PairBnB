@@ -38,7 +38,8 @@ class ResidencesController < ApplicationController
   end
 
   def edit
-    @residence = Residence.find(params[:residence].to_i)
+    @user = User.find(params[:id])
+    @residence = @user.residences.first
   end
 
   def destroy

@@ -1,0 +1,7 @@
+<%= form_for :residence, url: residences_path do |f| %>
+  <%= f.text_field :city, placeholder: "City" %><br>
+  <%= f.text_field :state, placeholder: "State" %><br>
+  <%= f.text_field :zip_code, placeholder: "Zipcode" %><br>
+  <%= f.text_field :description, placeholder: "Description" %><br>
+  <%= f.submit 'List your place' %>
+<% end %>

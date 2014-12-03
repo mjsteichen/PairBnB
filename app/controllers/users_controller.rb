@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       @availabilities = @user.availabilities
       @messages = @user.received_messages.order(:id).reverse_order
       @residences = @user.residences
-      @residence = Residence.new
+
     end
   end
 
