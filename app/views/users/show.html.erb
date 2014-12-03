@@ -395,9 +395,11 @@
       <% end %>
     <% end %>
     </div>
-    <div id="info_div" class="alert alert-success" role="alert">
-      Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       <a href="/" id="info_close">close</a>
-    </div>
+    <%if flash[:welcome] %>
+      <div id="info_div" class="alert alert-success" role="alert">
+          <%=flash.now[:welcome] %>
+      </div>
+    <%end%>
 
       <br>
       <div class="col-md-4"></div>

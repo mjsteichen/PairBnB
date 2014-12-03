@@ -51,8 +51,13 @@
 </script>
 
 <div class="row">
+    <% if flash[:sent_request_confirmation]%>
+    <div id="info_div" class="alert alert-success" role="alert">
+      <%= flash.now[:sent_request_confirmation]%>
+    </div>
+    <%end%>
   <div class="col-md-2">
-    <%= link_to 'Back to Search', :back%>
+    <%= link_to 'Back to Search Results', :back%>
   </div>
 
   <div class="col-md-3">

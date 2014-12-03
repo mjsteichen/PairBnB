@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      flash[:welcome] = " Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       "
       redirect_to user_path(@user)
     else
       render :new
@@ -34,7 +35,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password], picture_url: params[:user][:picture_url], github_url: params[:user][:github_url], twitter_url: params[:user][:twitter_url], bio: params[:user][:bio])
+    @user.attributes = {name: params[:user][:name], email: params[:user][:email], picture_url: params[:user][:picture_url], github_url: params[:user][:github_url], twitter_url: params[:user][:twitter_url], bio: params[:user][:bio]}
+    if @user.save(:validate => false)
       redirect_to user_path(@user)
     else
       render 'edit'
