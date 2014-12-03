@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      flash[:welcome] = " Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       "
       redirect_to user_path(@user)
     else
       render :new
