@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  # before_filter :load_user
+  # def load_user
+  #   @user = User.find(params[:id])
+  # end
+  # def lookup_user
+  # User.find(params[:id])
+  # end
   def new
     @user = User.new
   end
@@ -16,6 +23,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # if @user.id != logged_in_user_id
+    # if is_logged_on_user?(@user)
+    # if is_logged_on_user?(params[:id])  - Then take the User.find and move it into the else
     if @user.id != session[:user_id]
       session.clear
       redirect_to root_path
