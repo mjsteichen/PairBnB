@@ -302,12 +302,12 @@
       <% if @residences.length == 0%>
         <h4>Hey this page looks pretty empty to me... <%= link_to 'Add your place!' %></h4>
         <div id = "add_place" >
-          <%= render partial: "shared/residence" %>
+          <%= render partial: "shared/create_residence" %>
         </div>
       <% else %>
 
         <div class="col-md-6">
-        <% @user_residence = @residences.first %>
+        <% @user_residence = @residences.last %>
         <% @user_residence.images.each do |image| %>
           <span class="residence-img"><img src=<%= image.url %>><span><br>
           <%= link_to 'remove this picture', residence_image_path(@user_residence, image), method: :delete %><br>
