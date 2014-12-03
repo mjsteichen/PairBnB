@@ -2,29 +2,43 @@
 
 
 <script type="text/javascript">
+  var currentUserId = <%= @user.id %>;
+
   $(document).ready(function() {
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
 
       var calendar = new Y.Calendar({
         contentBox: "#mycalendar",
         width:'340px',
-        showPrevMonth: false,
-        showNextMonth: false,
+        showPrevMonth: true,
+        showNextMonth: true,
         date: new Date()}).render();
 
       var dtdate = Y.DataType.Date;
+      var current_date = new Date();
+      var current_month = current_date.getMonth() + 1;
+      var current_year = current_date.getFullYear();
 
-      $.each($("#available p"), function(index, element) {
-        availableDay = $(element).attr("id")
-        availableDay = "_" + +availableDay;
-        $("td[id$='" + availableDay + "']:not(.yui3-calendar-column-hidden)").addClass("available").css("background-color", "#14A714")
-      });
+      function loadMonth(month, year) {
+        var request = $.ajax({url: "/month_schedules/" + currentUserId + "/" + month + "/" + year,
+                              dataType: "json"});
 
-      $.each($("#booked p"), function(index, element) {
-        bookedDay = $(element).attr("id")
-        bookedDay = "_" + +bookedDay;
-        $("td[id$='" + bookedDay + "']:not(.yui3-calendar-column-hidden)").addClass("booked").css("background-color", "#C9302C")
-      })
+        request.done(function(monthData) {
+          $.each(monthData, function(index, day) {
+            var dayElement = $("td[id$='_" + day.day + "']:not(.yui3-calendar-column-hidden)");
+            if(day.pairing_id) {
+              dayElement.addClass("booked").css("background-color", "#C9302C");
+              dayElement.data('pairing-id', day.pairing_id);
+
+            } else if(day.availability_id) {
+              dayElement.addClass("available").css("background-color", "#14A714");
+              dayElement.data('availability-id', day.availability_id);
+            };
+          });
+        });
+      }
+
+      loadMonth(current_month, current_year);
 
       calendar.on("selectionChange", function (ev) {
         var newDate = ev.newSelection[0];
@@ -35,15 +49,15 @@
           if ($("td[id$='_" + day_selector + "']:not(.yui3-calendar-column-hidden)").hasClass("available")) {
             var input = $("<input>", { type: "hidden", name: "date", value: date });
             $("#reply_form").find("#request_text").append($(input));
-            $("#reply_form").show()
-            $("#valid_date_alert").hide()
-            $("#login_alert").hide()
+            $("#reply_form").show();
+            $("#valid_date_alert").hide();
+            $("#login_alert").hide();
           } else {
-            $("#reply_form").hide()
-            $("#valid_date_alert").show()
+            $("#reply_form").hide();
+            $("#valid_date_alert").show();
           };
         } else {
-          $("#login_alert").show()
+          $("#login_alert").show();
         }
       });
     });

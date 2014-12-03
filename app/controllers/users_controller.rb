@@ -35,7 +35,6 @@ class UsersController < ApplicationController
       @received_messages = @user.received_messages.order(:id).reverse_order
       @sent_messages = @user.sent_messages.order(:id).reverse_order
       @residences = @user.residences
-
     end
   end
 

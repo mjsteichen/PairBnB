@@ -1,7 +1,7 @@
 <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 
 <script type="text/javascript">
-
+  var currentUserId = <%= @user.id %>;
 
   $(document).ready(function() {
     add_place_link = $("a:contains('Add your place')");
@@ -103,11 +103,9 @@
       var current_date = new Date();
       var current_month = current_date.getMonth() + 1;
       var current_year = current_date.getFullYear();
-      console.log(current_month);
-      console.log(current_year);
 
       function loadMonth(month, year) {
-        var request = $.ajax({url: "/month_schedules/" + currentUserId() + "/" + month + "/" + year,
+        var request = $.ajax({url: "/month_schedules/" + currentUserId + "/" + month + "/" + year,
                               dataType: "json"});
 
         request.done(function(monthData) {
@@ -120,7 +118,7 @@
             } else if(day.availability_id) {
               dayElement.addClass("available").css("background-color", "#14A714");
               dayElement.data('availability-id', day.availability_id);
-            }
+            };
           });
         });
       }
@@ -163,26 +161,17 @@
         loadMonth(current_month, current_year);
       });
 
-
-      function currentUserId() {
-        var logout_href = $("a:contains('Logout')").attr("href");
-        var start_of_userid_on_logout_href = logout_href.lastIndexOf("/")+1;
-        var user_id = logout_href.slice(start_of_userid_on_logout_href);
-        return user_id;
-      }
-
       calendar.on("dateClick", function (ev) {
         var dayElement = $(ev.cell._node);
 
         var newDate = ev.date;
         var date = dtdate.format(newDate);
         var node = $(dayElement[0]);
-        var user_id = currentUserId();
 
         if (node.hasClass("available")) {
           node.removeClass("available").css("background-color", "white");
           var request = $.ajax({
-            url: "/users/" + user_id + "/availabilities/" + node.data('availability-id'),
+            url: "/users/" + currentUserId + "/availabilities/" + node.data('availability-id'),
             type: "DELETE"
           });
           request.done(function(response) {
@@ -193,7 +182,7 @@
         } else {
           node.addClass("available").css("background-color", "#14A714");
           var request = $.ajax({
-            url: "/users/" + user_id + "/availabilities",
+            url: "/users/" + currentUserId + "/availabilities",
             type: "POST",
             data: { date: date}
           });
