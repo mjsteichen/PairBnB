@@ -260,14 +260,15 @@
         <%= render partial: "shared/edit_residence" %>
       <% end %>
     </div>
-  </div>
+
 
 
     <div id="user_information" class="displays">
+      <div class="col-md-1"></div>
       <div class="col-md-3">
         <img src=<%= @user.picture_url %>>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-8">
         <strong>Name: </strong><%= @user.name %><br>
         <strong>Email: </strong><%= @user.email %><br>
         <strong>Bio: </strong><%= @user.bio %><br>
