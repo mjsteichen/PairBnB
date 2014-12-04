@@ -347,17 +347,17 @@
 
 
     <div id="user_information" class="displays">
-      <div class="col-md-1"></div>
-      <div class="col-md-4">
+
+      <div class="col-sm-3 col-md-4">
       <% if flash[:notice] %>
       <div id="shoutout_div" class="alert alert-success" role="alert"><%= flash.now[:notice] %>
       </div>
       <% end %>
-      <div class="col-md-3 col-lg-3">
+      <div class="col-s-6 col-md-4 col-lg-3">
         <img src=<%= @user.picture_url %>>
       </div>
     </div>
-      <div class="col-md-6 col-lg-7">
+      <div class="col-s-5 col-md-6 col-lg-7">
         <strong>Name: </strong><%= @user.name %><br>
         <strong>Email: </strong><%= @user.email %><br>
         <strong>Bio: </strong><%= @user.bio %><br>
@@ -393,7 +393,7 @@
       </div>
     <%end%>
     <div id="info_div" class="alert alert-success" role="alert">
-      Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       <a href="/" id="info_close">close</a>
+      Welcome to PairBnB!  This calendar holds your availabilities at your residence. Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.<a href="/" id="info_close">close</a>
     </div>
       <br>
       <div class="col-md-3"></div>
