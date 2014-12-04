@@ -87,6 +87,20 @@
     $($("#edit_residence").find("form")[0]).submit(function(event) {
       event.preventDefault();
       $("#residence_edit_form").show();
+    });
+
+    $("#new_shoutout").click(function(event) {
+      event.preventDefault();
+      $(this).parent().parent().find("#shoutout_form").show();
+    })
+
+    $("#shoutout_form").submit(function(event) {
+      $("#shoutout_div").show();
+    })
+
+    $("#shoutout_close").click(function(event) {
+      event.preventDefault();
+      $("#shoutout_div").hide();
     })
 
     YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
@@ -335,6 +349,11 @@
     <div id="user_information" class="displays">
       <div class="col-md-1"></div>
       <div class="col-md-4">
+      <% if flash[:notice] %>
+      <div id="shoutout_div" class="alert alert-success" role="alert"><%= flash.now[:notice] %>
+      </div>
+      <% end %>
+      <div class="col-md-3">
         <img src=<%= @user.picture_url %>>
       </div>
       <div class="col-md-7">
@@ -352,17 +371,24 @@
         <h1>Past Pairings</h1>
       </div>
         <ul>
-          <% @user.visited_pairings.each do |pair| %>
-          <li><%= link_to pair.host.name, new_pairing_shoutout_path(pair.host_id) %></li>
+        <% @user.visited_pairings.each do |pair| %>
+          <li><a href="/" id="new_shoutout"><%= pair.host.name %></a></li>
           <!-- this passes the host_id aka user_id as a pairing_id, please do not panic it's ok. -->
+          <div id="shoutout_form">
+              <%= form_for :shoutout, url: pairing_shoutouts_path(pair), method: :post do |f| %>
+                <%= f.text_field :text, placeholder: "Leave a shoutout" %><br>
+                <%= f.submit "Send 'em a shoutout" %>
+              <% end %>
+          </div>
         <% end %>
       </ul>
+
     </div>
 
   <div id="user_availabilities" class="displays">
     <%if flash[:welcome] %>
       <div id="info_div" class="alert alert-success" role="alert">
-          <%=flash.now[:welcome] %>
+          <%= flash.now[:welcome] %>
       </div>
     <%end%>
     <div id="info_div" class="alert alert-success" role="alert">
