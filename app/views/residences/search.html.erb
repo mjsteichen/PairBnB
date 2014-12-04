@@ -17,13 +17,15 @@
     <% end %>
   <% end %>
 
-      <div id="result-page">
+      <div class="result-page">
       <ul>
       <% @residences.each do |residence| %>
         <li>
           <div class="row">
             <div class="col-xs-2 col-s-2 col-md-3">
+              <div id="res-img">
               <img src=<%= residence.user.picture_url %>>
+            </div>
             </div>
             <div class="col-xs-2 col-md-3">
               <h5>Name: <%=link_to residence.user.name, residence_path(residence) %></h5>
@@ -34,9 +36,9 @@
               <h5>Bio:</h5> <%= residence.user.bio%>
             </div>
         </li>
-      </div>
       <% end %>
       </ul>
+      </div>
     </div>
 
 </div>
