@@ -110,18 +110,16 @@
       <%= flash.now[:sent_request_confirmation]%>
     </div>
     <%end%>
-  <div class="col-md-2">
-    <%= link_to 'Back to Search Results', :back%>
-  </div>
+  <div class="col-md-2"></div>
 
   <div class="col-md-3">
-    <h3><%= @user.name %></h3>
+    <h2><%= @user.name %></h2>
   </div>
   <div class="col-md-7"></div>
 </div>
 <div class="row">
   <div class="col-md-2"></div>
-  <div class="col-md-2">
+  <div class="col-md-3">
     <div id="residence_user">
       <img src=<%= @user.picture_url %>><br>
 
@@ -130,7 +128,7 @@
   <div class="col-md-5">
     <h4>Specialties</h4>
       <p><%= @user.specialties %></p>
-    <h3>Bio</h3>
+    <h4>Bio</h4>
       <p><%= @user.bio %></p>
         <%= link_to 'Github', "https://github.com/#{@user.github_url}"%>
         <%= link_to 'Twitter', "https://twitter.com/#{@user.twitter_url}"%><br>
@@ -145,17 +143,17 @@
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-9">
-    <h3>House Description & Rules</h3>
+    <h4>House Description & Rules</h4>
       <p><%= @residence.description %></p>
     <div id="residence_pics">
-      <% @residence.images.each do |image| %>
-        <img src=<%= image.url %>>
+     <% @residence.images.each do |image| %>
+         <span class="residence-img"><img src=<%= image.url %>></span>
       <% end %>
     </div>
     <br><br>
     <div id="valid_date_alert" class="alert alert-info" role="alert">Click on a green date to make a request!</div>
     <div id="login_alert" class="alert alert-info" role="alert">You have to be logged in to make a request!</div>
-    <h3>Upcoming Availability</h3>
+    <h4>Upcoming Availability</h4>
     <div class="row">
       <div class="col-md-3">
         <div id="available">
@@ -201,10 +199,12 @@
   </div>
   </div>
   <% end %>
-  <h3>Shoutouts</h3>
-  <% @user.received_shoutouts.each do |shoutout| %>
-    <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
-  <% end %>
+  <div id="shoutouts">
+    <h4>Shoutouts</h4>
+    <% @user.received_shoutouts.each do |shoutout| %>
+      <p><%=shoutout.sender.name%> says... "<em><%= shoutout.text %></em>"</p>
+    <% end %>
+    </div>
   </div>
 
 </div>

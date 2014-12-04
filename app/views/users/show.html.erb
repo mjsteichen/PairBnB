@@ -205,13 +205,13 @@
   <div class="row">
     <h1>Dashboard</h1>
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4" id="nav-space">
+    <div class="col-md-3"></div>
+    <div class="col-md-3" id="nav-space">
           <ul class="nav nav-pills">
             <li role ="presentation" id="mess"><a href="/">Messages</a></li>
             <li role ="presentation" id="res"><a href="/">My Place</a></li>
             <li role ="presentation" id="avail"><a href="/">My Availabilities</a></li>
-            <li role ="presentation" class="active" id="info"><a href="/">User Info</a></li>
+            <li role ="presentation" class="active" id="info"><a href="/">My Info</a></li>
             <li role ="presentation" id="req"><a href="/">Requests</a></li>
           </ul>
     </div>
@@ -223,34 +223,38 @@
     <div class="col-md-2"></div>
     <div class="col-md-8"> <!-- my child lives on line 288 -->
 
+    <div class = "col-md-2"></div>
+    <div class = "col-md-4">
     <div id="user_requests" class="displays">
       <% if @requests.length == 0 %>
         <br>
-        <h4>Sorry, doesn't look like you have any requests yet!</h4>
+        <h4>Sorry, doesn't look like you have any requests!</h4>
       <% end %>
       <ul>
       <% @requests.each do |request| %>
-        <li>Request from: <%= User.find(request.sender_id).name %></li>
+        <div class= "message_sender_wrapper">
+          <li>Request from: <%= User.find(request.sender_id).name %></li>
+        </div>
         <li>They want to stay in: <%= Residence.find(request.residence_id).city %></li>
         <li>On: <%= request.date %></li>
         <li>Message: <%= request.text %></li>
-        <br>
         <%= form_for :pairing, :html => {:class => "accept_pair"}, url: pairings_path, method: :post do |f| %>
           <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
           <%= hidden_field_tag 'date', "#{request.date}" %>
           <%= hidden_field_tag 'recipient', "#{@user.id}" %>
           <%= hidden_field_tag 'residence', "#{request.residence_id}" %>
           <%= hidden_field_tag 'request', "#{request.id}" %>
-          <%= f.submit "Let's do it!" %>
+          <%= f.submit "Let's do it!", class: "btn btn-danger" %>
         <% end %>
         <%= form_for :request, url: residence_request_path(Residence.find(request.residence_id), request.id), method: :delete  do |f| %>
           <%= hidden_field_tag 'date', "#{request.date}" %>
           <%= hidden_field_tag 'sender', "#{request.sender_id}" %>
-          <%= f.submit "No thanks" %>
+          <%= f.submit "No, thanks", class: "btn btn-danger" %>
         <% end %>
       <% end %>
       </ul>
     </div>
+  </div>
 
     <div id="user_messages" class="displays">
       <h4> Received Messages</h4>
@@ -330,10 +334,10 @@
 
     <div id="user_information" class="displays">
       <div class="col-md-1"></div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <img src=<%= @user.picture_url %>>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-7">
         <strong>Name: </strong><%= @user.name %><br>
         <strong>Email: </strong><%= @user.email %><br>
         <strong>Bio: </strong><%= @user.bio %><br>
@@ -365,7 +369,7 @@
       Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       <a href="/" id="info_close">close</a>
     </div>
       <br>
-      <div class="col-md-4"></div>
+      <div class="col-md-3"></div>
       <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
 
         <div id="leftcolumn" class="yui3-u">

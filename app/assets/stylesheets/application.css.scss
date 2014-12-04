@@ -12,6 +12,7 @@
 }
 
 .message_sender_wrapper {
+  margin-top: 10px;
   background-color: #dbd9d9;
 }
 
@@ -100,7 +101,7 @@
   padding-bottom: 25px;
 }
 .dashboard ul{
-  width: 496px;
+  width: 486px;
 }
 .dashboard h1{
   text-align: center;
@@ -168,4 +169,25 @@
    display: none;
    margin: auto;
    padding-top: 20px;
+}
+
+#result-page li{
+  padding-bottom: 10px;
+  border-bottom: 1px black solid;
+}
+
+#shoutouts{
+  margin-bottom: 30px;
+}
+
+#user_messages li{
+  list-style-type: none;
+}
+
+#user_requests form{
+  display: inline-block;
+}
+
+#user_requests li {
+  list-style-type: none;
 }
