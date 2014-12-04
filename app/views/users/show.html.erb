@@ -218,9 +218,7 @@
 <div class='dashboard'>
   <div class="row">
     <h1>Dashboard</h1>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-3" id="nav-space">
+    <div id="nav-space">
           <ul class="nav nav-pills">
             <li role ="presentation" id="mess"><a href="/">Messages</a></li>
             <li role ="presentation" id="res"><a href="/">My Place</a></li>
@@ -228,17 +226,11 @@
             <li role ="presentation" class="active" id="info"><a href="/">My Info</a></li>
             <li role ="presentation" id="req"><a href="/">Requests</a></li>
           </ul>
-    </div>
-    <div class="col-md-4"></div> <!-- closes the nav colum -->
-  </div> <!-- closes the nav row -->
-
-
+    </div> <!-- closes the nav colum -->
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8"> <!-- my child lives on line 288 -->
 
-    <div class = "col-md-2"></div>
-    <div class = "col-md-4">
     <div id="user_requests" class="displays">
       <% if @requests.length == 0 %>
         <br>
@@ -267,7 +259,6 @@
         <% end %>
       <% end %>
       </ul>
-    </div>
   </div>
 
     <div id="user_messages" class="displays">
@@ -347,17 +338,14 @@
 
 
     <div id="user_information" class="displays">
-
-      <div class="col-sm-3 col-md-4">
       <% if flash[:notice] %>
       <div id="shoutout_div" class="alert alert-success" role="alert"><%= flash.now[:notice] %>
       </div>
       <% end %>
-      <div class="col-s-6 col-md-4 col-lg-3">
-        <img src=<%= @user.picture_url %>>
+      <div class="col-sm-3 col-md-4">
+        <img id="profile_img" src=<%= @user.picture_url %>>
       </div>
-    </div>
-      <div class="col-s-5 col-md-6 col-lg-7">
+      <div class="col-s-5 col-md-6 col-lg-7" id="bio">
         <strong>Name: </strong><%= @user.name %><br>
         <strong>Email: </strong><%= @user.email %><br>
         <strong>Bio: </strong><%= @user.bio %><br>
@@ -369,7 +357,7 @@
         <br><br><br>
       </div>
       <div class="row">
-        <h1>Past Pairings</h1>
+        <h1>Pairings</h1>
       </div>
         <ul>
         <% @user.visited_pairings.each do |pair| %>
@@ -396,7 +384,6 @@
       Welcome to PairBnB!  This calendar holds your availabilities at your residence. Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.<a href="/" id="info_close">close</a>
     </div>
       <br>
-      <div class="col-md-3"></div>
       <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
 
         <div id="leftcolumn" class="yui3-u">
