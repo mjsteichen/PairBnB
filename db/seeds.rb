@@ -17,7 +17,7 @@ emily = User.create!(name: "Emily Owaki", email: "emily.owaki@gmail.com", passwo
 
 emilys_place = emily.residences.create!(user_id: 2, city: "Chicago", state: "IL", zip_code: "60600", neighborhood: "Loop", description: "My place is nestled in Chicago's bustling downtown. Really close to all forms of public transportation and countless entertainment options. My boyfriend and I love it! If you crash at our place you'll be staying on a couch-- most likely with our cat, Mr. Whiskers" )
 
-emilys_apartment_pic = Image.create!(residence_id: 2, url: "")
+emilys_apartment_pic = Image.create!(residence_id: 2, url: "https://lh3.googleusercontent.com/xAMdVYl5adyB_F-OcVl-0mmdb0xs5GFJwNG7ZlhCZ6cfzpbKg9qATxkXrYMX2EJgyDwP35KSf8U=w1896-h839")
 
 michael = User.create!(name: "Michael Steichen",  email: "michael.steichen@gmail.com", password: "password", picture_url: "https://dl-web.dropbox.com/get/Wolves%202014/Michael%20S..jpg?_subject_uid=45230430&w=AACI3-IJNHXfaZfrVK5lITx6sFmLf8hKd0s63Rz4PuZQ6g", bio: "Hi hello! My friends call me 'mikesteich' cause it rhymes that way. I grew up in Tulsa, Oklahoma and moved to Chicago in 2006. Before I arrived at Dev Bootcamp, I was working in Chicago's specialty coffee scene as a trainer and quality controller. Let's pair sometime!", specialties: "RoR, Schemas, Postgres, Brewing Coffee", github_url: "mjsteichen", twitter_url: "MeikSteich")
 
