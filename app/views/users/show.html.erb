@@ -89,14 +89,14 @@
       $("#residence_edit_form").show();
     });
 
-    $("#new_shoutout").click(function(event) {
+    $(".new_shoutout a").click(function(event) {
       event.preventDefault();
       $(this).parent().parent().find("#shoutout_form").show();
-    })
+    });
 
-    $("#shoutout_form").submit(function(event) {
+    $(".shoutout_form").submit(function(event) {
       $("#shoutout_div").show();
-    })
+    });
 
     $("#shoutout_close").click(function(event) {
       event.preventDefault();
@@ -372,9 +372,9 @@
       </div>
         <ul>
         <% @user.visited_pairings.each do |pair| %>
-          <li><a href="/" id="new_shoutout"><%= pair.host.name %></a></li>
+          <li><a href="/" class="new_shoutout"><%= pair.host.name %></a></li>
           <!-- this passes the host_id aka user_id as a pairing_id, please do not panic it's ok. -->
-          <div id="shoutout_form">
+          <div class="shoutout_form">
               <%= form_for :shoutout, url: pairing_shoutouts_path(pair), method: :post do |f| %>
                 <%= f.text_field :text, placeholder: "Leave a shoutout" %><br>
                 <%= f.submit "Send 'em a shoutout" %>
