@@ -249,7 +249,7 @@
         <div class= "message_sender_wrapper">
           <li>Request from: <%= User.find(request.sender_id).name %></li>
         </div>
-        <li>They want to stay in: <%= Residence.find(request.residence_id).city %></li>
+        <li>They're headed to: <%= Residence.find(request.residence_id).city %></li>
         <li>On: <%= request.date %></li>
         <li>Message: <%= request.text %></li>
         <%= form_for :pairing, :html => {:class => "accept_pair"}, url: pairings_path, method: :post do |f| %>
@@ -353,11 +353,11 @@
       <div id="shoutout_div" class="alert alert-success" role="alert"><%= flash.now[:notice] %>
       </div>
       <% end %>
-      <div class="col-md-3">
+      <div class="col-md-3 col-lg-3">
         <img src=<%= @user.picture_url %>>
       </div>
     </div>
-      <div class="col-md-7">
+      <div class="col-md-6 col-lg-7">
         <strong>Name: </strong><%= @user.name %><br>
         <strong>Email: </strong><%= @user.email %><br>
         <strong>Bio: </strong><%= @user.bio %><br>
