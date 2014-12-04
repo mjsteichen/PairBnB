@@ -16,11 +16,6 @@
   background-color: #dbd9d9;
 }
 
-
-#user_information img{
-  height: 200px;
-}
-
 #upload_image_wrapper {
   padding-left: 0px;
 }
@@ -38,12 +33,41 @@
   text-align: center
 }
 
+
 .id_for_me {
   display: none;
 }
 
+#bio{
+  margin-left: 15px;
+  margin-right: 15px;
+  #edit_user_2{
+    padding-top:15px;
+  }
+}
+
+#nav-space{
+  .nav{
+    margin: 0 auto;
+    display:table;
+  }
+}
+
+
+
+#demo{
+  #leftcolumn{
+    margin: 0 auto;
+  }
+}
+
 #mycalendar {
   box-shadow: 1px 1px 1px black;
+}
+@media (max-width: 600px) {
+  #mycalendar, .yui3-calendar{
+    width:100% !important;
+  }
 }
 
 .jumbotron{
@@ -195,4 +219,9 @@
 
 #shoutout_form {
   display: none;
+}
+
+#profile_img {
+  width: 100%;
+  height: auto;
 }
