@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20141201165852) do
     t.string   "state"
     t.string   "zip_code"
     t.string   "neighborhood"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20141201165852) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "picture_url"
-    t.string   "bio"
+    t.text     "bio"
     t.string   "specialties"
     t.string   "github_url"
     t.string   "twitter_url"
