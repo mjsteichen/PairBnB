@@ -42,6 +42,7 @@ describe ResidencesController do
         user = User.create(name: "Nate Delage", email: "natelovescats@gmail.com", password: "catscats")
         allow(controller).to receive(:current_user) {user}
 
+
         post :create, residence_params
         expect(assigns(:residence)).to eq(Residence.last)
       end

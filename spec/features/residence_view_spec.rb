@@ -10,7 +10,7 @@ feature 'residences' do
 
   scenario "when user searches for a location but none exist" do
     visit '/'
-    fill_in "I'm going to...", :with => "New York", :match => :first
+    fill_in "I'm headed to...", :with => "New York", :match => :first
     click_button 'Search', :match => :first
     expect(page).to have_text("Sorry! No pairs in that neck of the woods.")
   end

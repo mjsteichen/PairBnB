@@ -7,6 +7,7 @@ feature "user sessions" do
   end
   scenario "when user logs in" do
     visit '/'
+    click_on 'Login'
     #will need to add something here to tell it to click Login once we test further
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => "testing123"
@@ -16,14 +17,14 @@ feature "user sessions" do
 
   scenario "when user clicks sign up" do
     visit '/'
-    click_on 'Sign Up'
+    click_on 'Signup'
     expect(page).to have_text('Sign Up')
   end
 
   scenario "when user signs up with valid info" do
     visit '/'
-    click_on 'Sign Up'
-    fill_in 'Name', :with => "Cats McGee"
+    click_on 'Signup'
+    fill_in 'Full Name', :with => "Cats McGee"
     fill_in 'Email', :with => "cats@gmail.com"
     fill_in 'Password', :with => "catscatscats"
     click_on 'Sign Up'
@@ -36,7 +37,7 @@ feature "user sessions" do
   end
 
   scenario "user should see dashboard button when signed in" do
-    visit '/'
+    visit new_session_path
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => 'testing123'
     click_button 'Login'
@@ -44,7 +45,7 @@ feature "user sessions" do
   end
 
   scenario "user isn't prompted to sign in when already logged in" do
-    visit '/'
+    visit new_session_path
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => 'testing123'
     click_button 'Login'
@@ -53,7 +54,7 @@ feature "user sessions" do
   end
 
   scenario "dashboard is rendered properly" do
-    visit '/'
+    visit new_session_path
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => 'testing123'
     click_button 'Login'
