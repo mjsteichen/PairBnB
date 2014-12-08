@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.update(picture_url: "https://myspace.com/common/images/user.png")
       session[:user_id] = @user.id
       flash[:welcome] = " Welcome to PairBnB!  This calendar holds your availabilities.  Click a date to create a new availability, click again to remove it!  If you accept a request, the date that you accept will show red.       "
       redirect_to user_path(@user)
