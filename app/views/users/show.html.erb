@@ -293,7 +293,7 @@
   </div>
       <h4> Sent Messages</h4>
     <div class= "row">
-    <div class = "col-md-2"></div>
+    <div class = "col-md-1"></div>
     <div class = "col-md-4">
     <ul>
       <%@sent_messages.each do |sent_mess|%>
@@ -321,7 +321,7 @@
           <span class="residence-img"><img src=<%= image.url %>><span><br>
           <%= link_to 'remove this picture', residence_image_path(@user_residence, image), method: :delete %><br>
         <% end %>
-      </div> <!-- closes residence image colum -->
+      </div>
       <div class="col-md-6">
         <strong>City: </strong><%= @user_residence.city %><br>
         <strong>State:</strong> <%= @user_residence.state%><br>
@@ -332,7 +332,7 @@
         <br><br>
         <%= render partial: "shared/residence" %>
       <% end %>
-    </div> <!-- ends the info colum -->
+    </div>
   </div>
 
 
