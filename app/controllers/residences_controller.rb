@@ -28,8 +28,8 @@ class ResidencesController < ApplicationController
 
   def create
     @residence = Residence.new(residence_params)
-    @residence.user_id = current_user.id
-    @user = @residence.user
+    @residence.user_id = current_user_id
+    @user = current_user
     if @residence.save
       redirect_to user_path(@user)
     else

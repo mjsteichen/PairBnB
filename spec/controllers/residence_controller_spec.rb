@@ -44,9 +44,10 @@ describe ResidencesController do
 
 
         post :create, residence_params
-        expect(assigns(:residence)).to eq(Residence.last)
+        expect(assigns(:residence)).to be_a_new(Residence)
       end
     end
+
     context "when invalid params are passed" do
       it "assigns a newly created but unsaved residence as @residence" do
         residence_params = {residence: {state: "IL", zip_code: "12345", description: "It's hella decent"} }
