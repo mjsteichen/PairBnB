@@ -48,6 +48,7 @@ describe UsersController do
 
   describe "GET #show" do
     it 'finds a user and assigns them to @user' do
+      allow(controller).to receive(:current_user) {user}
       get :show, { id: user.to_param }
       expect(assigns(:user)).to eq(user)
     end
