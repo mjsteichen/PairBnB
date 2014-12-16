@@ -52,7 +52,6 @@ class ResidencesController < ApplicationController
 
   def destroy
     @residence = User.find(params[:id].to_i).residences.first
-    # @residence = Residence.find(params[:id].to_i)
     @residence.destroy!
     redirect_to user_path(current_user)
   end
