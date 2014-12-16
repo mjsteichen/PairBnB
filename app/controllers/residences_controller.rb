@@ -45,7 +45,7 @@ class ResidencesController < ApplicationController
   def update
     @residence = Residence.find(current_user.residences.first)
     @user = @residence.user
-    @residence.attributes = { city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], description: params[:residence][:description]}
+    @residence.attributes = { city: params[:residence][:city], state: params[:residence][:state], zip_code: params[:residence][:zip_code], neighborhood: params[:neighborhood], description: params[:residence][:description]}
     @residence.save(:validate => false)
     redirect_to user_path(@user)
   end
