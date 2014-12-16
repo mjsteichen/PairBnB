@@ -332,6 +332,7 @@
         <%= render partial: "shared/image" %>
         <br><br>
         <%= render partial: "shared/residence" %>
+        <%= button_to 'Delete place', residence_path, :method => "delete", class: 'btn btn-danger' %>
       <% end %>
     </div>
   </div>
