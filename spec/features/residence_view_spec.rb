@@ -15,17 +15,11 @@ feature 'residences' do
     expect(page).to have_text("Sorry! No pairs in that neck of the woods.")
   end
 
-  pending
   scenario "when user searches for an exisiting location" do
-    # visit root_path
-    # fill_in "I'm going to...", :with => "Chicago"
-    # click_on 'Search'
-    # expect(page).to_not have_text('Login')
-    # # p @user
-    # # p @residence
-    # # p @image
-    # # click_button 'Search'
-    # # expect(page).to have_text("test person")
+    visit root_path
+    fill_in "I'm headed to...", :with => "Chicago"
+    click_on 'Search'
+    expect(page).to have_text("Name: test person")
   end
 
 end
