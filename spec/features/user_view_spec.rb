@@ -4,6 +4,7 @@ require 'rails_helper'
 feature "user sessions" do
   before do
     @user = User.create!(name: "test person", email: "test@gmail.com", password: "testing123" )
+    @user2 = User.create!(name: "second test", email: "test2@gmail.com", password: "testing123")
   end
   scenario "when user logs in" do
     visit '/'
@@ -61,4 +62,12 @@ feature "user sessions" do
     expect(page).to have_text('Availabilities')
   end
 
+  scenario "user can only see their dashboard" do
+    visit new_session_path
+    fill_in 'email', :with => "test2@gmail.com"
+    fill_in 'password', :with => 'testing123'
+    click_button 'Login'
+    visit user_path(id: @user)
+    expect(page).to have_text('Name: second test')
+  end
 end
