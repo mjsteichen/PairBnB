@@ -49,7 +49,7 @@ feature "user sessions" do
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => 'testing123'
     click_button 'Login'
-    click_on 'Pair BnB'
+    click_on 'PairBnB'
     expect(page).not_to have_text('Login')
   end
 
