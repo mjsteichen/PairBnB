@@ -8,7 +8,6 @@ feature "user sessions" do
   scenario "when user logs in" do
     visit '/'
     click_on 'Login'
-    #will need to add something here to tell it to click Login once we test further
     fill_in 'email', :with => "test@gmail.com"
     fill_in 'password', :with => "testing123"
     click_button 'Login'
