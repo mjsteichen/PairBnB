@@ -22,4 +22,12 @@ feature 'residences' do
     expect(page).to have_text("Name: test person")
   end
 
+  scenario "when user views residence show page" do
+    visit root_path
+    fill_in "I'm headed to...", :with => "Chicago"
+    click_on "Search"
+    click_on "test person"
+    expect(page).to have_text("House Description & Rules")
+  end
+
 end
